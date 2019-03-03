@@ -3,7 +3,7 @@ package controllers
 import (
 	"github.com/Penun/swutil/models"
 	"github.com/astaxie/beego"
-	//"encoding/json"
+	"encoding/json"
 	//"fmt"
 )
 
@@ -11,9 +11,8 @@ type SpeciesController struct {
 	beego.Controller
 }
 
-type AttributeReq struct {
-	Species_id int `json:"species_id"`
-	Index int `json:"index"`
+type ByIdRequest struct {
+	Id int `json:"id"`
 }
 
 type AttributeResp struct {
@@ -38,27 +37,18 @@ func (this *SpeciesController) Get() {
     this.ServeJSON()
 }
 
-// func (this *SpeciesController) Attributes() {
-// 	var attreq AttributeReq
-// 	err := json.Unmarshal(this.Ctx.Input.RequestBody, &attreq)
-// 	resp := AttributeResp{Occ: BaseResp{Success: false, Error: ""}}
-// 	if err == nil {
-// 		resp.Index = attreq.Index
-// 		t_spAtt := models.GetSpecAtt(int64(attreq.Species_id))
-// 		if len(t_spAtt) > 0 {
-// 			resp.Occ.Success = true
-// 			resp.Result = t_spAtt
-// 		} else {
-// 			resp.Occ.Error = "Failed to find."
-// 		}
-// 	} else {
-// 		fmt.Println(err)
-// 		resp.Occ.Error = "Failed Parse."
-// 	}
-// 	this.Data["json"] = resp
-// 	this.ServeJSON()
-// }
-//
+func (this *SpeciesController) Attributes() {
+	var attreq ByIdRequest
+	var t_spAtt []models.SpeAttribute
+	err := json.Unmarshal(this.Ctx.Input.RequestBody, &attreq)
+	if err == nil {
+		t_spAtt = models.GetSpecAtt(int64(attreq.Id))
+	} else {
+		beego.Error(err)
+	}
+	this.Data["json"] = t_spAtt
+	this.ServeJSON()
+}
 //
 // func (this *SpeciesController) Add() {
 // 	var insReq InsSpeReq
