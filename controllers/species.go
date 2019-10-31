@@ -15,20 +15,21 @@ type ByIdRequest struct {
 	Id int `json:"id"`
 }
 
-type AttributeResp struct {
-	Index int `json:"index"`
-	Result []models.SpeAttribute `json:"result"`
-}
+// type AttributeResp struct {
+// 	Index int `json:"index"`
+// 	Result []models.SpeAttribute `json:"result"`
+// }
 
-type InsSpeReq struct {
-	Species models.Species `json:"species"`
-	Attributes []models.SpeAttribute `json:"attributes"`
-}
+// // Insert object
+// type InsSpeReq struct {
+// 	Species models.Species `json:"species"`
+// 	Attributes []models.SpeAttribute `json:"attributes"`
+// }
 
-type InsSpeResp struct{
-	Species models.Species `json:"species"`
-	Attributes []models.SpeAttribute `json:"attributes"`
-}
+// type InsSpeResp struct{
+// 	Species models.Species `json:"species"`
+// 	Attributes []models.SpeAttribute `json:"attributes"`
+// }
 
 func (this *SpeciesController) Get() {
 	var t_spec []models.Species
