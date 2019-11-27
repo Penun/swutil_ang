@@ -11,6 +11,16 @@ type SpecializationsController struct {
 	beego.Controller
 }
 
+type SpecTale struct {
+	Id int64 `json:"id"`
+    Name string `json:"name"`
+    Type string `json:"type"`
+    Ranked bool `json:"ranked"`
+    Description string `json:"description"`
+	Right bool `json:"right"`
+	Down bool `json:"down"`
+}
+
 func (this *SpecializationsController) Skills() {
 	var skillreq ByIdRequest
 	err := json.Unmarshal(this.Ctx.Input.RequestBody, &skillreq)
@@ -35,11 +45,17 @@ func (this *SpecializationsController) Talents() {
 	err := json.Unmarshal(this.Ctx.Input.RequestBody, &taleReq)
 	if err == nil {
 		tales := models.GetTalentsBySpecial(int64(taleReq.Id))
-		resTales := make([]models.Talent, 0)
+		resTales := make([]SpecTale, 0)
 		if taLen := len(tales); taLen > 0 {
-			resTales = make([]models.Talent, taLen)
+			resTales = make([]SpecTale, taLen)
 			for i := 0; i < taLen; i++ {
-				resTales[i] = *tales[i].Talent
+				resTales[i].Id = tales[i].Talent.Id
+				resTales[i].Name = tales[i].Talent.Name
+				resTales[i].Type = tales[i].Talent.Type
+				resTales[i].Ranked = tales[i].Talent.Ranked
+				resTales[i].Description = tales[i].Talent.Description
+				resTales[i].Right = tales[i].Right
+				resTales[i].Down = tales[i].Down
 			}
 		}
 		this.Data["json"] = resTales
