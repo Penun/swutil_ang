@@ -7,7 +7,9 @@ import (
 
 func init() {
     beego.Router("/", &controllers.MainController{})
-	beego.Router("/species", &controllers.SpeciesController{})
+	beego.Router("/careers", &controllers.MainController{})
+	beego.Router("/species", &controllers.MainController{}, "*:Species")
+	beego.Router("/species/list", &controllers.SpeciesController{})
 	beego.Router("/species/attributes", &controllers.SpeciesController{}, "post:Attributes")
 	beego.Router("/careers_d", &controllers.CareersController{})
 	beego.Router("/careers/specializations", &controllers.CareersController{}, "post:Specializations")

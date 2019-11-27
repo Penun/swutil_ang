@@ -44,7 +44,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var routes = [
-    { path: 'species', redirectTo: '', pathMatch: "full" },
+    { path: 'species', component: _species_species_component__WEBPACK_IMPORTED_MODULE_3__["SpeciesComponent"] },
     { path: '', component: _species_species_component__WEBPACK_IMPORTED_MODULE_3__["SpeciesComponent"] },
     { path: 'careers', component: _careers_careers_component__WEBPACK_IMPORTED_MODULE_4__["CareersComponent"] }
 ];
@@ -554,7 +554,7 @@ var SpeciesService = /** @class */ (function () {
     function SpeciesService(unit, http) {
         this.unit = unit;
         this.http = http;
-        this.speciesUrl = '/species';
+        this.speciesUrl = '/species/list';
         this.specAttrUrl = '/species/attributes';
     }
     SpeciesService.prototype.getSpecies = function () {

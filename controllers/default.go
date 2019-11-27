@@ -8,6 +8,10 @@ type MainController struct {
 	beego.Controller
 }
 
-func (c *MainController) Get() {
-	c.TplName = "index.tpl"
+func (this *MainController) Species() {
+	this.Redirect("/", 302)
+}
+
+func (this *MainController) Get() {
+	this.TplName = "index.tpl"
 }
