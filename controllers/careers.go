@@ -11,6 +11,10 @@ type CareersController struct {
 	beego.Controller
 }
 
+func (this *CareersController) Reroute() {
+	this.TplName = "index.tpl"
+}
+
 func (this *CareersController) Get() {
 	var t_cars []models.Career
     t_cars = models.GetCareers()

@@ -38,6 +38,18 @@ func (this *SpeciesController) Get() {
     this.ServeJSON()
 }
 
+func (this *SpeciesController) SpeciesId() {
+	var specReq ByIdRequest
+	var spec models.Species
+	if err := json.Unmarshal(this.Ctx.Input.RequestBody, &specReq); err == nil {
+		spec = models.GetSpeciesId(int64(specReq.Id))
+	} else {
+		beego.Error(err)
+	}
+	this.Data["json"] = spec
+	this.ServeJSON()
+}
+
 func (this *SpeciesController) Attributes() {
 	var attreq ByIdRequest
 	var t_spAtt []models.SpeAttribute

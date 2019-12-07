@@ -10,11 +10,10 @@
 </head>
 <body>
   <app-root></app-root>
-  <script type="text/javascript" src="static/js/runtime.js"></script>
-  <script type="text/javascript" src="static/js/es2015-polyfills.js" nomodule></script>
-  <script type="text/javascript" src="static/js/polyfills.js"></script>
-  <script type="text/javascript" src="static/js/styles.js"></script>
-  <script type="text/javascript" src="static/js/vendor.js"></script>
-  <script type="text/javascript" src="static/js/main.js"></script>
+  <script type="text/javascript" src="static/js/runtime-es2015.js"></script>
+  <script type="text/javascript" src="static/js/polyfills-es2015.js"></script>
+  <script type="text/javascript" src="static/js/styles-es2015.js"></script>
+  <script type="text/javascript" src="static/js/vendor-es2015.js"></script>
+  <script type="text/javascript" src="static/js/main-es2015.js"></script>
 </body>
 </html>

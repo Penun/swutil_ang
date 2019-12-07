@@ -9,9 +9,9 @@ type MainController struct {
 }
 
 func (this *MainController) Species() {
-	this.Redirect("/", 302)
+	this.TplName = "index.tpl"
 }
 
 func (this *MainController) Get() {
-	this.TplName = "index.tpl"
+	this.Redirect("/species", 302)
 }
