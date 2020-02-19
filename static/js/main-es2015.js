@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"mainDiv\">\n    <div class=\"page sw_back\">\n        <div class=\"menu_wrapper\">\n            <div class=\"tab_header sw_back menu_tab menu_index\" (click)=\"toggleMenu()\" (mouseenter)=\"darkArrow()\" (mouseleave)=\"lightArrow()\">\n                <img src=\"/static/img/{{menuArrow}}\" alt=\"^\" [@rotateLeft]=\"menuStatus ? 'left' : 'vertical'\" class=\"menu_arrow\" />\n                <img src=\"/static/img/{{menuArrow}}\" alt=\"^\" [ngClass]=\"{hide_m: menuStatus}\" class=\"menu_arrow menu_arrow_r fade_in\" />\n            </div>\n            <div class=\"tab_header sw_back_s menu_index\" [@openClose]=\"menuStatus ? 'true' : 'false'\">\n                <span class=\"tab fade_in\" routerLink=\"/species\" routerLinkActive=\"hide\" [routerLinkActiveOptions]=\"{exact: true}\" [ngClass]=\"{hide_m: !menuStatus}\" (click)=\"toggleMenu()\">Species</span>\n                <span class=\"tab fade_in\" routerLink=\"/careers\" routerLinkActive=\"hide\" [routerLinkActiveOptions]=\"{exact: true}\" [ngClass]=\"{hide_m: !menuStatus}\" (click)=\"toggleMenu()\">Careers</span>\n                <span class=\"tab fade_in\" routerLink=\"/characters\" routerLinkActive=\"hide\" [routerLinkActiveOptions]=\"{exact: true}\" [ngClass]=\"{hide_m: !menuStatus}\" (click)=\"toggleMenu()\">Characters</span>\n            </div>\n        </div>\n        <router-outlet></router-outlet>\n    </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"mainDiv\">\n    <div class=\"page sw_back\">\n        <div class=\"menu_wrapper\">\n            <div class=\"tab_header sw_back menu_tab menu_index\" (click)=\"toggleMenu()\" (mouseenter)=\"darkArrow()\" (mouseleave)=\"lightArrow()\">\n                <img src=\"/static/img/{{menuArrow}}\" alt=\"^\" [@rotateLeft]=\"menuStatus ? 'left' : 'vertical'\" class=\"menu_arrow\" />\n                <img src=\"/static/img/{{menuArrow}}\" alt=\"^\" [ngClass]=\"{hide_m: menuStatus}\" class=\"menu_arrow menu_arrow_r fade_in\" />\n            </div>\n            <div class=\"tab_header sw_back_s menu_index\" [@openClose]=\"menuStatus ? 'true' : 'false'\">\n                <span class=\"tab fade_in\" routerLink=\"/species\" routerLinkActive=\"hide\" [routerLinkActiveOptions]=\"{exact: true}\" [ngClass]=\"{hide_m: !menuStatus}\" (click)=\"toggleMenu()\">Species</span>\n                <span class=\"tab fade_in\" routerLink=\"/careers\" routerLinkActive=\"hide\" [routerLinkActiveOptions]=\"{exact: true}\" [ngClass]=\"{hide_m: !menuStatus}\" (click)=\"toggleMenu()\">Careers</span>\n                <span class=\"tab fade_in\" routerLink=\"/market\" routerLinkActive=\"hide\" [routerLinkActiveOptions]=\"{exact: true}\" [ngClass]=\"{hide_m: !menuStatus}\" (click)=\"toggleMenu()\">Market</span>\n                <!-- <span class=\"tab fade_in\" routerLink=\"/characters\" routerLinkActive=\"hide\" [routerLinkActiveOptions]=\"{exact: true}\" [ngClass]=\"{hide_m: !menuStatus}\" (click)=\"toggleMenu()\">Characters</span> -->\n            </div>\n        </div>\n        <router-outlet></router-outlet>\n    </div>\n</div>\n");
 
 /***/ }),
 
@@ -114,6 +114,84 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"sixty_he fade_in\">\n    <div class=\"doubPage\">\n        <!-- Left Columns  -->\n        <div class=\"gridCol fade_in gridList_2\" *ngIf=\"curList == 'characters'\">\n            <span class=\"gridRow2 h2\"><b>Characters</b></span>\n            <span class=\"gridRow3 clickable alCenter\" (click)=\"addCharacter()\"><b>+ Character</b></span>\n            <div class=\"gridRow4 innerList\">\n                <span *ngFor=\"let char of characters\" class=\"clickable alCenter\">\n                    {{char.name}}\n\t            </span>\n            </div>\n        </div>\n        <div class=\"gridCol fade_in gridList\" *ngIf=\"curList == 'species'\">\n            <span class=\"gridRow2 h2\"><b>Species</b></span>\n            <div class=\"gridRow3 innerList\">\n                <span *ngFor=\"let spec of species\" class=\"clickable alCenter\" (click)=\"showSpeciesDetails(spec)\">\n                    {{spec.name}}\n\t            </span>\n            </div>\n        </div>\n        <div class=\"gridCol fade_in gridList\" *ngIf=\"curList == 'careers'\">\n            <span class=\"gridRow2 h2\"><b>Careers</b></span>\n            <div class=\"gridRow3 innerList\">\n                <span *ngFor=\"let career of careers\" class=\"clickable alCenter\" (click)=\"showCareerDetails(career)\">\n                    {{career.name}}\n\t            </span>\n            </div>\n        </div>\n        <!-- End left colums -->\n        <div class=\"gridCol2 right_col fade_in gridPanel\" *ngIf=\"curChar\">\n            <div class=\"gridRow2 gridCol charSheetPanel panelPad sw_back_s\">\n                <div class=\"gridRow gridCol clickable fieldBack\">\n                    <div *ngIf=\"nameEdit\">\n                        <label for=\"name\">Name:</label>\n                        <input #name type=\"text\" [(ngModel)]=\"curChar.name\" (keyup.enter)=\"editName()\" class=\"inputBack inputBod\" />\n                    </div>\n                    <div *ngIf=\"!nameEdit\" (click)=\"editName()\">\n                        Name: {{ curChar.name }}\n                    </div>\n                </div>\n                <div class=\"gridRow gridCol2 clickable fieldBack\" (click)=\"editSpecies()\">\n                    <span *ngIf=\"!curChar.species\">\n                        Species: (Click)\n                    </span>\n                    <span *ngIf=\"curChar.species\">\n                        Species: {{ curChar.species.name }}\n                    </span>\n                </div>\n                <div class=\"gridRow2 gridCol staticBack fieldBack\" *ngIf=\"curChar.species\">\n                    <span>\n                        Spent XP: {{ curChar.spent_xp }}\n                    </span>\n                </div>\n                <div class=\"gridRow2 gridCol2 staticBack fieldBack\" *ngIf=\"curChar.species\">\n                    <span>\n                        Total XP: {{ curChar.total_xp }}\n                    </span>\n                </div>\n                <div class=\"gridRow3 gridCol clickable fieldBack\" *ngIf=\"curChar.species\" (click)=\"editCareer()\">\n                    <span *ngIf=\"!curChar.career\">\n                        Career: (Click)\n                    </span>\n                    <span *ngIf=\"curChar.career\">\n                        Career: {{ curChar.career.name }}\n                    </span>\n                </div>\n            </div>\n\n            <!-- Species Panel -->\n            <div class=\"gridCol outPanel fade_in sw_back_s\" *ngIf=\"curSpec\">\n                <div class=\"outInPanel\">\n                    <button type=\"button\" (click)=\"editSpecies()\" class=\"closeButton\">X</button>\n                    <span class=\"th_head gridRow gridCol\"></span>\n                    <span class=\"gridRow gridCol alCenter th_name headerColor\"><b>{{curSpec.name}}</b></span>\n                    <div class=\"characterBlock gridCol gridRow2 alCenter\">\n                        <span></span>\n                        <span class=\"th_head gridRow gridCol2\"></span>\n                        <span class=\"headerColor gridRow gridCol2 charCharGrid\">\n                            <span><b>Br</b></span>\n                            <span><b>Ag</b></span>\n                            <span><b>In</b></span>\n                            <span><b>Cu</b></span>\n                            <span><b>Wi</b></span>\n                            <span><b>Pr</b></span>\n                        </span>\n                        <span></span>\n                        <span></span>\n                        <span class=\"charCharGrid\">\n                            <span>{{curSpec.brawn}}</span>\n                            <span>{{curSpec.agility}}</span>\n                            <span>{{curSpec.intellect}}</span>\n                            <span>{{curSpec.cunning}}</span>\n                            <span>{{curSpec.willpower}}</span>\n                            <span>{{curSpec.presence}}</span>\n                        </span>\n                        <span></span>\n                    </div>\n                    <div class=\"gridCol gridRow3 tp_midRow\">\n                        <span class=\"headerColor th_head tp_midInner\"><b>Wound Threshold:</b></span>\n                        <span>{{curSpec.wound_threshold}} + Brawn</span>\n                    </div>\n                    <div class=\"gridCol gridRow4 tp_midRow\">\n                        <span class=\"headerColor th_head tp_midInner\"><b>Strain Threshold:</b></span>\n                        <span>{{curSpec.strain_threshold}} + Willpower</span>\n                    </div>\n                    <div class=\"gridCol gridRow5 tp_midRow\">\n                        <span class=\"headerColor th_head tp_midInner\"><b>Starting XP:</b></span>\n                        <span>{{curSpec.starting_xp}} xp</span>\n                    </div>\n                    <div class=\"gridRow6 alStretch\">\n                        <ul class=\"tp_specAbil\">\n                            <li *ngFor=\"let attrib of curSpec.attributes\">\n                                <span class=\"attrib_desc\" [innerHtml]=\"attrib.description\"></span>\n                            </li>\n                        </ul>\n                    </div>\n                    <button type=\"button\" (click)=\"setSpecies()\" class=\"closeButton\">Select</button>\n                </div>\n            </div>\n            <!-- End Species Panel -->\n            <!-- Career Panel -->\n            <div class=\"gridCol outPanel fade_in sw_back_s\" *ngIf=\"curCareer\">\n                <div class=\"outInPanel\">\n                    <button type=\"button\" (click)=\"editCareer()\" class=\"closeButton\">X</button>\n                    <div class=\"gridRow2\">\n                        <span class=\"h2\"><b>{{curCareer.name}}</b></span>\n                        <p>Skill Proficiencies: {{curCareer.skill_slots}}</p>\n                        <div>\n                            <span *ngFor=\"let skill of curCareer.skills\">\n                                <i>{{skill.name}}</i>\n                            </span>\n                        </div>\n                        <div>\n                            <span *ngFor=\"let spec of curCareer.specializations\" class=\"clickable\" (click)=\"showSpecial(spec)\">\n                                <p><i>{{spec.name}}</i>\n                                    <span *ngFor=\"let skill of spec.skills\">\n                                        <i>{{skill.name}}</i>\n                                    </span>\n                                </p>\n                            </span>\n                        </div>\n                    </div>\n                    <button type=\"button\" (click)=\"setCareer()\" class=\"closeButton\">Select</button>\n                </div>\n            </div>\n            <!-- End Panel -->\n            <!-- Specialization Panel -->\n            <div class=\"gridCol outPanel fade_in sw_back_s\" *ngIf=\"curSpecial\">\n                <div class=\"outInPanel\">\n                    <button type=\"button\" (click)=\"showSpecial(null)\" class=\"closeButton\">X</button>\n                    <div>\n                        <span><b>{{curSpecial.name}}</b></span>\n                        <p>Skill Proficiencies: {{curSpecial.skill_slots}}</p>\n                        <div>\n                            <span *ngFor=\"let skill of curSpecial.skills\">\n                                <i>{{skill.name}}</i>\n                            </span>\n                        </div>\n                        <span class=\"h2\"><b>Talent Tree</b></span>\n                        <div>\n                            <div class=\"talent sw_back gridCol gridRow\" (click)=\"revealTalent(curSpecial.talents[0])\">{{curSpecial.talents[0].name}}</div>\n                            <div class=\"conn gridCol2 gridRow\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[0].right\" alt=\"Conn\"/></div>\n                            <div class=\"talent sw_back gridCol3 gridRow\" (click)=\"revealTalent(curSpecial.talents[1])\">{{curSpecial.talents[1].name}}</div>\n                            <div class=\"conn gridCol4 gridRow\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[1].right\" alt=\"Conn\"/></div>\n                            <div class=\"talent sw_back gridCol5 gridRow\" (click)=\"revealTalent(curSpecial.talents[2])\">{{curSpecial.talents[2].name}}</div>\n                            <div class=\"conn gridCol6 gridRow\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[2].right\" alt=\"Conn\"/></div>\n                            <div class=\"talent sw_back gridCol7 gridRow\" (click)=\"revealTalent(curSpecial.talents[3])\">{{curSpecial.talents[3].name}}</div>\n                            <div class=\"vConn gridCol gridRow2\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[0].down\" alt=\"Conn\"/></div>\n                            <div class=\"vConn gridCol3 gridRow2\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[1].down\" alt=\"Conn\"/></div>\n                            <div class=\"vConn gridCol5 gridRow2\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[2].down\" alt=\"Conn\"/></div>\n                            <div class=\"vConn gridCol7 gridRow2\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[3].down\" alt=\"Conn\"/></div>\n                            <div class=\"talent sw_back gridCol gridRow3\" (click)=\"revealTalent(curSpecial.talents[4])\">{{curSpecial.talents[4].name}}</div>\n                            <div class=\"conn gridCol2 gridRow3\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[4].right\" alt=\"Conn\"/></div>\n                            <div class=\"talent sw_back gridCol3 gridRow3\" (click)=\"revealTalent(curSpecial.talents[5])\">{{curSpecial.talents[5].name}}</div>\n                            <div class=\"conn gridCol4 gridRow3\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[5].right\" alt=\"Conn\"/></div>\n                            <div class=\"talent sw_back gridCol5 gridRow3\" (click)=\"revealTalent(curSpecial.talents[6])\">{{curSpecial.talents[6].name}}</div>\n                            <div class=\"conn gridCol6 gridRow3\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[6].right\" alt=\"Conn\"/></div>\n                            <div class=\"talent sw_back gridCol7 gridRow3\" (click)=\"revealTalent(curSpecial.talents[7])\">{{curSpecial.talents[7].name}}</div>\n                            <div class=\"vConn gridCol gridRow4\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[4].down\" alt=\"Conn\"/></div>\n                            <div class=\"vConn gridCol3 gridRow4\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[5].down\" alt=\"Conn\"/></div>\n                            <div class=\"vConn gridCol5 gridRow4\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[6].down\" alt=\"Conn\"/></div>\n                            <div class=\"vConn gridCol7 gridRow4\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[7].down\" alt=\"Conn\"/></div>\n                            <div class=\"talent sw_back gridCol gridRow5\" (click)=\"revealTalent(curSpecial.talents[8])\">{{curSpecial.talents[8].name}}</div>\n                            <div class=\"conn gridCol2 gridRow5\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[8].right\" alt=\"Conn\"/></div>\n                            <div class=\"talent sw_back gridCol3 gridRow5\" (click)=\"revealTalent(curSpecial.talents[9])\">{{curSpecial.talents[9].name}}</div>\n                            <div class=\"conn gridCol4 gridRow5\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[9].right\" alt=\"Conn\"/></div>\n                            <div class=\"talent sw_back gridCol5 gridRow5\" (click)=\"revealTalent(curSpecial.talents[10])\">{{curSpecial.talents[10].name}}</div>\n                            <div class=\"conn gridCol6 gridRow5\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[10].right\" alt=\"Conn\"/></div>\n                            <div class=\"talent sw_back gridCol7 gridRow5\" (click)=\"revealTalent(curSpecial.talents[11])\">{{curSpecial.talents[11].name}}</div>\n                            <div class=\"vConn gridCol gridRow6\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[8].down\" alt=\"Conn\"/></div>\n                            <div class=\"vConn gridCol3 gridRow6\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[9].down\" alt=\"Conn\"/></div>\n                            <div class=\"vConn gridCol5 gridRow6\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[10].down\" alt=\"Conn\"/></div>\n                            <div class=\"vConn gridCol7 gridRow6\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[11].down\" alt=\"Conn\"/></div>\n                            <div class=\"talent sw_back gridCol gridRow7\" (click)=\"revealTalent(curSpecial.talents[12])\">{{curSpecial.talents[12].name}}</div>\n                            <div class=\"conn gridCol2 gridRow7\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[12].right\" alt=\"Conn\"/></div>\n                            <div class=\"talent sw_back gridCol3 gridRow7\" (click)=\"revealTalent(curSpecial.talents[13])\">{{curSpecial.talents[13].name}}</div>\n                            <div class=\"conn gridCol4 gridRow7\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[13].right\" alt=\"Conn\"/></div>\n                            <div class=\"talent sw_back gridCol5 gridRow7\" (click)=\"revealTalent(curSpecial.talents[14])\">{{curSpecial.talents[14].name}}</div>\n                            <div class=\"conn gridCol6 gridRow7\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[14].right\" alt=\"Conn\"/></div>\n                            <div class=\"talent sw_back gridCol7 gridRow7\" (click)=\"revealTalent(curSpecial.talents[15])\">{{curSpecial.talents[15].name}}</div>\n                            <div class=\"vConn gridCol gridRow8\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[12].down\" alt=\"Conn\"/></div>\n                            <div class=\"vConn gridCol3 gridRow8\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[13].down\" alt=\"Conn\"/></div>\n                            <div class=\"vConn gridCol5 gridRow8\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[14].down\" alt=\"Conn\"/></div>\n                            <div class=\"vConn gridCol7 gridRow8\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[15].down\" alt=\"Conn\"/></div>\n                            <div class=\"talent sw_back gridCol gridRow9\" (click)=\"revealTalent(curSpecial.talents[16])\">{{curSpecial.talents[16].name}}</div>\n                            <div class=\"conn gridCol2 gridRow9\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[16].right\" alt=\"Conn\"/></div>\n                            <div class=\"talent sw_back gridCol3 gridRow9\" (click)=\"revealTalent(curSpecial.talents[17])\">{{curSpecial.talents[17].name}}</div>\n                            <div class=\"conn gridCol4 gridRow9\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[17].right\" alt=\"Conn\"/></div>\n                            <div class=\"talent sw_back gridCol5 gridRow9\" (click)=\"revealTalent(curSpecial.talents[18])\">{{curSpecial.talents[18].name}}</div>\n                            <div class=\"conn gridCol6 gridRow9\"><img src=\"/static/img/connector.png\" *ngIf=\"curSpecial.talents[18].right\" alt=\"Conn\"/></div>\n                            <div class=\"talent sw_back gridCol7 gridRow9\" (click)=\"revealTalent(curSpecial.talents[19])\">{{curSpecial.talents[19].name}}</div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <!-- End Panel -->\n            <!-- Talent Panel -->\n        </div>\n    </div>\n</div>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/market/market-armor/market-armor.component.html":
+/*!*******************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/market/market-armor/market-armor.component.html ***!
+  \*******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<div *ngIf=\"!curArm\" class=\"armorBase fade_in\">\n    <div *ngIf=\"armor.length > 0\" class=\"armorTable armorMainTable sw_back_s armTabBase\">\n        <span class=\"alCenter th_head headerColor th_name armorSpan th_head_mod pads\">Armor</span>\n        <span class=\"alCenter armorSpan armorTable th_head th_sub_name headerColor th_head_mod pads\"><span class=\"gridCol\">Type</span><span class=\"gridCol2\">Price</span></span>\n        <span *ngFor=\"let arm of armor\" class=\"armorSpan armorTable clickable margs\" (click)=\"setCurArm(arm)\">\n            <span class=\"gridCol alignLeft\">{{arm.model}}</span><span class=\"gridCol2\">{{arm.armor.price}}</span>\n        </span>\n    </div>\n    <div *ngIf=\"armor.length <= 0\" class=\"armorTable sw_back_s armTabBase\">\n        <span class=\"alCenter th_head headerColor th_name armorSpan th_head_mod pads\">No Armor Found</span>\n    </div>\n</div>\n<div *ngIf=\"curArm\" class=\"fade_in sw_back_op det_back\">\n    <div class=\"det_head\">\n        <span class=\"alCenter th_head th_name headerColor\"><b>{{curArm.model}}</b></span>\n        <button type=\"button\" class=\"closeButton\" (click)=\"clearCurArm()\">X</button>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Armor Type:</b></span>\n        <span>{{curArm.armor.type}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Defense:</b></span>\n        <span>{{curArm.armor.defense}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Soak:</b></span>\n        <span>{{curArm.armor.soak}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Price:</b></span>\n        <span>{{curArm.armor.price}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Encumbrance:</b></span>\n        <span>{{curArm.armor.encumbrance}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Hard Points:</b></span>\n        <span>{{curArm.armor.hard_points}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Rarity:</b></span>\n        <span>{{curArm.armor.rarity}}</span>\n    </div>\n    <div [innerHtml]=\"curArm.armor.description\" class=\"itemDesc\"></div>\n</div>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/market/market-attachment/market-attachment.component.html":
+/*!*****************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/market/market-attachment/market-attachment.component.html ***!
+  \*****************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<div *ngIf=\"!curAtt\" class=\"itemBase fade_in\">\n    <div *ngIf=\"weapons.length > 0\" class=\"itemTable itemMainTable sw_back_s itemTabBase\">\n        <span class=\"alCenter th_head headerColor th_name itemSpan th_head_mod pads\">Weapon Attachments</span>\n        <span class=\"alCenter itemSpan itemTable th_head th_sub_name headerColor th_head_mod pads\"><span class=\"gridCol\">Type</span><span class=\"gridCol2\">Price</span></span>\n        <span class=\"itemSpan itemRowContainer\">\n            <span *ngFor=\"let att of weapons\" class=\"itemTable clickable margs\" (click)=\"setCurAtt(att)\">\n                <span class=\"gridCol alignLeft\">{{att.model}}</span><span class=\"gridCol2\">{{att.attachment.price }}</span>\n            </span>\n        </span>\n    </div>\n    <div *ngIf=\"armor.length > 0\" class=\"itemTable itemMainTable sw_back_s itemTabBase\">\n        <span class=\"alCenter th_head headerColor th_name itemSpan th_head_mod pads\">Armor Attachments</span>\n        <span class=\"alCenter itemSpan itemTable th_head th_sub_name headerColor th_head_mod pads\"><span class=\"gridCol\">Type</span><span class=\"gridCol2\">Price</span></span>\n        <span class=\"itemSpan itemRowContainer\">\n            <span *ngFor=\"let att of armor\" class=\"itemTable clickable margs\" (click)=\"setCurAtt(att)\">\n                <span class=\"gridCol alignLeft\">{{att.model}}</span><span class=\"gridCol2\">{{att.attachment.price }}</span>\n            </span>\n        </span>\n    </div>\n    <div *ngIf=\"lightsabers.length > 0\" class=\"itemTable itemMainTable sw_back_s itemTabBase\">\n        <span class=\"alCenter th_head headerColor th_name itemSpan th_head_mod pads\">Lightsaber Attachments</span>\n        <span class=\"alCenter itemSpan itemTable th_head th_sub_name headerColor th_head_mod pads\"><span class=\"gridCol\">Type</span><span class=\"gridCol2\">Price</span></span>\n        <span class=\"itemSpan itemRowContainer\">\n            <span *ngFor=\"let att of lightsabers\" class=\"itemTable clickable margs\" (click)=\"setCurAtt(att)\">\n                <span class=\"gridCol alignLeft\">{{att.model}}</span><span class=\"gridCol2\">{{att.attachment.price }}</span>\n            </span>\n        </span>\n    </div>\n    <div *ngIf=\"weapons.length <= 0 && armor.length <= 0 && lightsabers.length <= 0\" class=\"itemTable sw_back_s itemTabBase\">\n        <span class=\"alCenter th_head headerColor th_name itemSpan th_head_mod pads\">No Attachments Found</span>\n    </div>\n</div>\n<div *ngIf=\"curAtt\" class=\"fade_in sw_back_op det_back\">\n    <div class=\"det_head\">\n        <span class=\"alCenter th_head th_name headerColor\"><b>{{curAtt.model}}</b></span>\n        <button type=\"button\" class=\"closeButton\" (click)=\"clearCurAtt()\">X</button>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Attachment Type:</b></span>\n        <span>{{curAtt.attachment.name}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Price:</b></span>\n        <span>{{curAtt.attachment.price}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Encumbrance:</b></span>\n        <span>{{curAtt.attachment.encumbrance}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>HP Required:</b></span>\n        <span>{{curAtt.attachment.hp_required}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Rarity:</b></span>\n        <span>{{curAtt.attachment.rarity}}</span>\n    </div>\n    <div [innerHtml]=\"curAtt.attachment.description\" class=\"itemDesc\"></div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Base Modifiers:</b></span>\n        <span [innerHtml]=\"curAtt.attachment.base_mod\"></span>\n    </div>\n    <div *ngIf=\"curAtt.modification_options.length > 0\" class=\"det_row mod_opts\">\n        <span *ngFor=\"let opt of curAtt.modification_options\">\n            <span class=\"headerColor th_head det_label\"><b>Modifier Option:</b></span>\n            <span>{{opt.option}}</span>\n            <span [innerHtml]=\"opt.description\"></span>\n        </span>\n    </div>\n</div>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/market/market-gear/market-gear.component.html":
+/*!*****************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/market/market-gear/market-gear.component.html ***!
+  \*****************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<div *ngIf=\"!curGear\" class=\"itemBase fade_in\">\n    <div *ngIf=\"comms.length > 0\" class=\"itemTable itemMainTable sw_back_s itemTabBase\">\n        <span class=\"alCenter th_head headerColor itemSpan th_head_mod pads\">Communications Equipment</span>\n        <span class=\"alCenter itemSpan itemTable th_head th_sub_name headerColor th_head_mod pads\"><span class=\"gridCol\">Type</span><span class=\"gridCol2\">Price</span></span>\n        <span class=\"itemSpan itemRowContainer\">\n            <span *ngFor=\"let gear of comms\" class=\"itemTable clickable margs\" (click)=\"setCurGear(gear)\">\n                <span class=\"gridCol alignLeft\">{{gear.model}}</span><span class=\"gridCol2\">{{gear.gear.price}}</span>\n            </span>\n        </span>\n    </div>\n    <div *ngIf=\"drugs.length > 0\" class=\"itemTable itemMainTable sw_back_s itemTabBase\">\n        <span class=\"alCenter th_head headerColor itemSpan th_head_mod pads\">Poisons and Drugs</span>\n        <span class=\"alCenter itemSpan itemTable th_head th_sub_name headerColor th_head_mod pads\"><span class=\"gridCol\">Type</span><span class=\"gridCol2\">Price</span></span>\n        <span class=\"itemSpan itemRowContainer\">\n            <span *ngFor=\"let gear of drugs\" class=\"itemTable clickable margs\" (click)=\"setCurGear(gear)\">\n                <span class=\"gridCol alignLeft\">{{gear.model}}</span><span class=\"gridCol2\">{{gear.gear.price}}</span>\n            </span>\n        </span>\n    </div>\n    <div *ngIf=\"scanners.length > 0\" class=\"itemTable itemMainTable sw_back_s itemTabBase\">\n        <span class=\"alCenter th_head headerColor itemSpan th_head_mod pads\">Scanning and Surveillance Equipment (Detection Devices)</span>\n        <span class=\"alCenter itemSpan itemTable th_head th_sub_name headerColor th_head_mod pads\"><span class=\"gridCol\">Type</span><span class=\"gridCol2\">Price</span></span>\n        <span class=\"itemSpan itemRowContainer\">\n            <span *ngFor=\"let gear of scanners\" class=\"itemTable clickable margs\" (click)=\"setCurGear(gear)\">\n                <span class=\"gridCol alignLeft\">{{gear.model}}</span><span class=\"gridCol2\">{{gear.gear.price}}</span>\n            </span>\n        </span>\n    </div>\n    <div *ngIf=\"medical.length > 0\" class=\"itemTable itemMainTable sw_back_s itemTabBase\">\n        <span class=\"alCenter th_head headerColor itemSpan th_head_mod pads\">Medical Equipment</span>\n        <span class=\"alCenter itemSpan itemTable th_head th_sub_name headerColor th_head_mod pads\"><span class=\"gridCol\">Type</span><span class=\"gridCol2\">Price</span></span>\n        <span class=\"itemSpan itemRowContainer\">\n            <span *ngFor=\"let gear of medical\" class=\"itemTable clickable margs\" (click)=\"setCurGear(gear)\">\n                <span class=\"gridCol alignLeft\">{{gear.model}}</span><span class=\"gridCol2\">{{gear.gear.price}}</span>\n            </span>\n        </span>\n    </div>\n    <div *ngIf=\"cybernetics.length > 0\" class=\"itemTable itemMainTable sw_back_s itemTabBase\">\n        <span class=\"alCenter th_head headerColor itemSpan th_head_mod pads\">Cybernetic Enhancements and Replacements</span>\n        <span class=\"alCenter itemSpan itemTable th_head th_sub_name headerColor th_head_mod pads\"><span class=\"gridCol\">Type</span><span class=\"gridCol2\">Price</span></span>\n        <span class=\"itemSpan itemRowContainer\">\n            <span *ngFor=\"let gear of cybernetics\" class=\"itemTable clickable margs\" (click)=\"setCurGear(gear)\">\n                <span class=\"gridCol alignLeft\">{{gear.model}}</span><span class=\"gridCol2\">{{gear.gear.price}}</span>\n            </span>\n        </span>\n    </div>\n    <div *ngIf=\"recrereation.length > 0\" class=\"itemTable itemMainTable sw_back_s itemTabBase\">\n        <span class=\"alCenter th_head headerColor itemSpan th_head_mod pads\">Recreational Entertainment</span>\n        <span class=\"alCenter itemSpan itemTable th_head th_sub_name headerColor th_head_mod pads\"><span class=\"gridCol\">Type</span><span class=\"gridCol2\">Price</span></span>\n        <span class=\"itemSpan itemRowContainer\">\n            <span *ngFor=\"let gear of recrereation\" class=\"itemTable clickable margs\" (click)=\"setCurGear(gear)\">\n                <span class=\"gridCol alignLeft\">{{gear.model}}</span><span class=\"gridCol2\">{{gear.gear.price}}</span>\n            </span>\n        </span>\n    </div>\n    <div *ngIf=\"security.length > 0\" class=\"itemTable itemMainTable sw_back_s itemTabBase\">\n        <span class=\"alCenter th_head headerColor itemSpan th_head_mod pads\">Infiltration and Espionage Equipment (Security)</span>\n        <span class=\"alCenter itemSpan itemTable th_head th_sub_name headerColor th_head_mod pads\"><span class=\"gridCol\">Type</span><span class=\"gridCol2\">Price</span></span>\n        <span class=\"itemSpan itemRowContainer\">\n            <span *ngFor=\"let gear of security\" class=\"itemTable clickable margs\" (click)=\"setCurGear(gear)\">\n                <span class=\"gridCol alignLeft\">{{gear.model}}</span><span class=\"gridCol2\">{{gear.gear.price}}</span>\n            </span>\n        </span>\n    </div>\n    <div *ngIf=\"survival.length > 0\" class=\"itemTable itemMainTable sw_back_s itemTabBase\">\n        <span class=\"alCenter th_head headerColor itemSpan th_head_mod pads\">Survival Gear</span>\n        <span class=\"alCenter itemSpan itemTable th_head th_sub_name headerColor th_head_mod pads\"><span class=\"gridCol\">Type</span><span class=\"gridCol2\">Price</span></span>\n        <span class=\"itemSpan itemRowContainer\">\n            <span *ngFor=\"let gear of survival\" class=\"itemTable clickable margs\" (click)=\"setCurGear(gear)\">\n                <span class=\"gridCol alignLeft\">{{gear.model}}</span><span class=\"gridCol2\">{{gear.gear.price}}</span>\n            </span>\n        </span>\n    </div>\n    <div *ngIf=\"tools.length > 0\" class=\"itemTable itemMainTable sw_back_s itemTabBase\">\n        <span class=\"alCenter th_head headerColor itemSpan th_head_mod pads\">Tools and Electronics</span>\n        <span class=\"alCenter itemSpan itemTable th_head th_sub_name headerColor th_head_mod pads\"><span class=\"gridCol\">Type</span><span class=\"gridCol2\">Price</span></span>\n        <span class=\"itemSpan itemRowContainer\">\n            <span *ngFor=\"let gear of tools\" class=\"itemTable clickable margs\" (click)=\"setCurGear(gear)\">\n                <span class=\"gridCol alignLeft\">{{gear.model}}</span><span class=\"gridCol2\">{{gear.gear.price}}</span>\n            </span>\n        </span>\n    </div>\n    <div *ngIf=\"loadBearing.length > 0\" class=\"itemTable itemMainTable sw_back_s itemTabBase\">\n        <span class=\"alCenter th_head headerColor itemSpan th_head_mod pads\">Load Bearing, Carrying, and Storage Equipment</span>\n        <span class=\"alCenter itemSpan itemTable th_head th_sub_name headerColor th_head_mod pads\"><span class=\"gridCol\">Type</span><span class=\"gridCol2\">Price</span></span>\n        <span class=\"itemSpan itemRowContainer\">\n            <span *ngFor=\"let gear of loadBearing\" class=\"itemTable clickable margs\" (click)=\"setCurGear(gear)\">\n                <span class=\"gridCol alignLeft\">{{gear.model}}</span><span class=\"gridCol2\">{{gear.gear.price}}</span>\n            </span>\n        </span>\n    </div>\n    <div *ngIf=\"slicing.length > 0\" class=\"itemTable itemMainTable sw_back_s itemTabBase\">\n        <span class=\"alCenter th_head headerColor itemSpan th_head_mod pads\">Slicing Tools</span>\n        <span class=\"alCenter itemSpan itemTable th_head th_sub_name headerColor th_head_mod pads\"><span class=\"gridCol\">Type</span><span class=\"gridCol2\">Price</span></span>\n        <span class=\"itemSpan itemRowContainer\">\n            <span *ngFor=\"let gear of slicing\" class=\"itemTable clickable margs\" (click)=\"setCurGear(gear)\">\n                <span class=\"gridCol alignLeft\">{{gear.model}}</span><span class=\"gridCol2\">{{gear.gear.price}}</span>\n            </span>\n        </span>\n    </div>\n    <div *ngIf=\"construction.length > 0\" class=\"itemTable itemMainTable sw_back_s itemTabBase\">\n        <span class=\"alCenter th_head headerColor itemSpan th_head_mod pads\">Construction and Salvage Tools</span>\n        <span class=\"alCenter itemSpan itemTable th_head th_sub_name headerColor th_head_mod pads\"><span class=\"gridCol\">Type</span><span class=\"gridCol2\">Price</span></span>\n        <span class=\"itemSpan itemRowContainer\">\n            <span *ngFor=\"let gear of construction\" class=\"itemTable clickable margs\" (click)=\"setCurGear(gear)\">\n                <span class=\"gridCol alignLeft\">{{gear.model}}</span><span class=\"gridCol2\">{{gear.gear.price}}</span>\n            </span>\n        </span>\n    </div>\n    <div *ngIf=\"remotes.length > 0\" class=\"itemTable itemMainTable sw_back_s itemTabBase\">\n        <span class=\"alCenter th_head headerColor itemSpan th_head_mod pads\">Remotes</span>\n        <span class=\"alCenter itemSpan itemTable th_head th_sub_name headerColor th_head_mod pads\"><span class=\"gridCol\">Type</span><span class=\"gridCol2\">Price</span></span>\n        <span class=\"itemSpan itemRowContainer\">\n            <span *ngFor=\"let gear of remotes\" class=\"itemTable clickable margs\" (click)=\"setCurGear(gear)\">\n                <span class=\"gridCol alignLeft\">{{gear.model}}</span><span class=\"gridCol2\">{{gear.gear.price}}</span>\n            </span>\n        </span>\n    </div>\n    <div *ngIf=\"itemless\" class=\"itemTable sw_back_s itemTabBase\">\n        <span class=\"alCenter th_head headerColor itemSpan th_head_unmod pads\">No Gear Found</span>\n    </div>\n</div>\n<div *ngIf=\"curGear\" class=\"fade_in sw_back_op det_back\">\n    <div class=\"det_head\">\n        <span class=\"alCenter th_head th_name headerColor\"><b>{{curGear.model}}</b></span>\n        <button type=\"button\" class=\"closeButton\" (click)=\"clearCurGear()\">X</button>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Gear:</b></span>\n        <span>{{curGear.gear.item}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Price:</b></span>\n        <span>{{curGear.gear.price}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Encumbrance:</b></span>\n        <span>{{curGear.gear.encumbrance}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Rarity:</b></span>\n        <span>{{curGear.gear.rarity}}</span>\n    </div>\n    <div [innerHtml]=\"curGear.gear.description\" class=\"itemDesc\"></div>\n</div>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/market/market-melee/market-melee.component.html":
+/*!*******************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/market/market-melee/market-melee.component.html ***!
+  \*******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<div *ngIf=\"!curMelee\" class=\"itemBase fade_in\">\n    <div *ngIf=\"brawl.length > 0\" class=\"itemTable itemMainTable sw_back_s itemTabBase\">\n        <span class=\"alCenter th_head headerColor th_name itemSpan th_head_mod pads\">Brawl</span>\n        <span class=\"alCenter itemSpan itemTable th_head th_sub_name headerColor th_head_mod pads\"><span class=\"gridCol\">Type</span><span class=\"gridCol2\">Price</span></span>\n        <span class=\"itemSpan itemRowContainer\">\n            <span *ngFor=\"let weap of brawl\" class=\"itemTable clickable margs\" (click)=\"setCurMelee(weap)\">\n                <span class=\"gridCol alignLeft\">{{weap.model}}</span><span class=\"gridCol2\">{{weap.weapon.price}}</span>\n            </span>\n        </span>\n    </div>\n    <div *ngIf=\"melee.length > 0\" class=\"itemTable itemMainTable sw_back_s itemTabBase\">\n        <span class=\"alCenter th_head headerColor th_name itemSpan th_head_mod pads\">Melee</span>\n        <span class=\"alCenter itemSpan itemTable th_head th_sub_name headerColor th_head_mod pads\"><span class=\"gridCol\">Type</span><span class=\"gridCol2\">Price</span></span>\n        <span class=\"itemSpan itemRowContainer\">\n            <span *ngFor=\"let weap of melee\" class=\"itemTable clickable margs\" (click)=\"setCurMelee(weap)\">\n                <span class=\"gridCol alignLeft\">{{weap.model}}</span><span class=\"gridCol2\">{{weap.weapon.price}}</span>\n            </span>\n        </span>\n    </div>\n    <div *ngIf=\"light.length > 0\" class=\"itemTable itemMainTable sw_back_s itemTabBase\">\n        <span class=\"alCenter th_head headerColor th_name itemSpan th_head_mod pads\">Lightsaber</span>\n        <span class=\"alCenter itemSpan itemTable th_head th_sub_name headerColor th_head_mod pads\"><span class=\"gridCol\">Type</span><span class=\"gridCol2\">Price</span></span>\n        <span class=\"itemSpan itemRowContainer\">\n            <span *ngFor=\"let weap of light\" class=\"itemTable clickable margs\" (click)=\"setCurMelee(weap)\">\n                <span class=\"gridCol alignLeft\">{{weap.model}}</span><span class=\"gridCol2\">{{weap.weapon.price}}</span>\n            </span>\n        </span>\n    </div>\n    <div *ngIf=\"brawl.length <= 0 && melee.length <= 0 && light.length <= 0\" class=\"itemTable sw_back_s itemTabBase\">\n        <span class=\"alCenter th_head headerColor th_name itemSpan th_head_mod pads\">No Melee Found</span>\n    </div>\n</div>\n<div *ngIf=\"curMelee\" class=\"fade_in sw_back_op det_back\">\n    <div class=\"det_head\">\n        <span class=\"alCenter th_head th_name headerColor\"><b>{{curMelee.model}}</b></span>\n        <button type=\"button\" class=\"closeButton\" (click)=\"clearCurMelee()\">X</button>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Type:</b></span>\n        <span>{{curMelee.weapon.sub_type}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Weapon:</b></span>\n        <span>{{curMelee.weapon.name}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Skill:</b></span>\n        <span>{{curMelee.weapon.skill.name}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Damage:</b></span>\n        <span><span *ngIf=\"curMelee.weapon.damage_add\">+</span><span *ngIf=\"curMelee.weapon.damage_sub\">-</span>{{curMelee.weapon.damage}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Critical:</b></span>\n        <span>{{curMelee.weapon.critical}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Range:</b></span>\n        <span>{{curMelee.weapon.range}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Encumbrance:</b></span>\n        <span>{{curMelee.weapon.encumbrance}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Hard Points:</b></span>\n        <span>{{curMelee.weapon.hard_points}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Price:</b></span>\n        <span>{{curMelee.weapon.price}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Rarity:</b></span>\n        <span>{{curMelee.weapon.rarity}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Special:</b></span>\n        <span>{{curMelee.weapon.special}}</span>\n    </div>\n    <div [innerHtml]=\"curMelee.weapon.description\" class=\"itemDesc\"></div>\n</div>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/market/market-ranged/market-ranged.component.html":
+/*!*********************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/market/market-ranged/market-ranged.component.html ***!
+  \*********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<div *ngIf=\"!curRange\" class=\"itemBase fade_in\">\n    <div *ngIf=\"light.length > 0\" class=\"itemTable itemMainTable sw_back_s itemTabBase\">\n        <span class=\"alCenter th_head headerColor th_name itemSpan th_head_mod pads\">Ranged (Light)</span>\n        <span class=\"alCenter itemSpan itemTable th_head th_sub_name headerColor th_head_mod pads\"><span class=\"gridCol\">Type</span><span class=\"gridCol2\">Price</span></span>\n        <span class=\"itemSpan itemRowContainer\">\n            <span *ngFor=\"let weap of light\" class=\"itemTable clickable margs\" (click)=\"setCurRange(weap)\">\n                <span class=\"gridCol alignLeft\">{{weap.model}}</span><span class=\"gridCol2\">{{weap.weapon.price}}</span>\n            </span>\n        </span>\n    </div>\n    <div *ngIf=\"heavy.length > 0\" class=\"itemTable itemMainTable sw_back_s itemTabBase\">\n        <span class=\"alCenter th_head headerColor th_name itemSpan th_head_mod pads\">Ranged (Heavy)</span>\n        <span class=\"alCenter itemSpan itemTable th_head th_sub_name headerColor th_head_mod pads\"><span class=\"gridCol\">Type</span><span class=\"gridCol2\">Price</span></span>\n        <span class=\"itemSpan itemRowContainer\">\n            <span *ngFor=\"let weap of heavy\" class=\"itemTable clickable margs\" (click)=\"setCurRange(weap)\">\n                <span class=\"gridCol alignLeft\">{{weap.model}}</span><span class=\"gridCol2\">{{weap.weapon.price}}</span>\n            </span>\n        </span>\n    </div>\n    <div *ngIf=\"gunn.length > 0\" class=\"itemTable itemMainTable sw_back_s itemTabBase\">\n        <span class=\"alCenter th_head headerColor th_name itemSpan th_head_mod pads\">Gunnery</span>\n        <span class=\"alCenter itemSpan itemTable th_head th_sub_name headerColor th_head_mod pads\"><span class=\"gridCol\">Type</span><span class=\"gridCol2\">Price</span></span>\n        <span class=\"itemSpan itemRowContainer\">\n            <span *ngFor=\"let weap of gunn\" class=\"itemTable clickable margs\" (click)=\"setCurRange(weap)\">\n                <span class=\"gridCol alignLeft\">{{weap.model}}</span><span class=\"gridCol2\">{{weap.weapon.price}}</span>\n            </span>\n        </span>\n    </div>\n    <div *ngIf=\"mach.length > 0\" class=\"itemTable itemMainTable sw_back_s itemTabBase\">\n        <span class=\"alCenter th_head headerColor th_name itemSpan th_head_mod pads\">Mechanics</span>\n        <span class=\"alCenter itemSpan itemTable th_head th_sub_name headerColor th_head_mod pads\"><span class=\"gridCol\">Type</span><span class=\"gridCol2\">Price</span></span>\n        <span class=\"itemSpan itemRowContainer\">\n            <span *ngFor=\"let weap of mach\" class=\"itemTable clickable margs\" (click)=\"setCurRange(weap)\">\n                <span class=\"gridCol alignLeft\">{{weap.model}}</span><span class=\"gridCol2\">{{weap.weapon.price}}</span>\n            </span>\n        </span>\n    </div>\n    <div *ngIf=\"light.length <= 0 && heavy.length <= 0 && gunn.length <= 0 && mach.length <= 0\" class=\"itemTable sw_back_s itemTabBase\">\n        <span class=\"alCenter th_head headerColor th_name itemSpan th_head_mod pads\">No Ranged Found</span>\n    </div>\n</div>\n<div *ngIf=\"curRange\" class=\"fade_in sw_back_op det_back\">\n    <div class=\"det_head\">\n        <span class=\"alCenter th_head th_name headerColor\"><b>{{curRange.model}}</b></span>\n        <button type=\"button\" class=\"closeButton\" (click)=\"clearCurRange()\">X</button>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Weapon Type:</b></span>\n        <span>{{curRange.weapon.sub_type}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Weapon:</b></span>\n        <span>{{curRange.weapon.name}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Skill:</b></span>\n        <span>{{curRange.weapon.skill.name}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Damage:</b></span>\n        <span><span *ngIf=\"curRange.weapon.damage_add\">+</span><span *ngIf=\"curRange.weapon.damage_sub\">-</span>{{curRange.weapon.damage}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Critical:</b></span>\n        <span>{{curRange.weapon.critical}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Range:</b></span>\n        <span>{{curRange.weapon.range}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Encumbrance:</b></span>\n        <span>{{curRange.weapon.encumbrance}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Hard Points:</b></span>\n        <span>{{curRange.weapon.hard_points}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Price:</b></span>\n        <span>{{curRange.weapon.price}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Rarity:</b></span>\n        <span>{{curRange.weapon.rarity}}</span>\n    </div>\n    <div class=\"det_row\">\n        <span class=\"headerColor th_head det_label\"><b>Special:</b></span>\n        <span>{{curRange.weapon.special}}</span>\n    </div>\n    <div [innerHtml]=\"curRange.weapon.description\" class=\"itemDesc\"></div>\n</div>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/market/market/market.component.html":
+/*!*******************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/market/market/market.component.html ***!
+  \*******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"sixty_he fade_in\">\n    <div class=\"base_page\">\n        <div class=\"gridRow2 market_mod\">\n            <span><label><b>Planet Mod:</b></label><select (change)=\"onSelect($event.target.value)\">\n                <option value=\"2\">Primary Core world such as Coruscant, Duro, or Corellia</option>\n                <option value=\"1\">Other Core world</option>\n                <option value=\"1\">World on primary trade lane</option>\n                <option value=\"0\">Colony or Inner Rim world</option>\n                <option value=\"0\" selected>Civilized world</option>\n                <option value=\"-1\">Mid Rim world</option>\n                <option value=\"-1\">Recently settled world, out of the way world</option>\n                <option value=\"-2\">Outer Rim world</option>\n                <option value=\"-2\">Frontier world</option>\n                <option value=\"-3\">Wild Space world</option>\n                <option value=\"-4\">Uncivilized world</option>\n            </select></span>\n            <span><label><b>Black Market (Restricted)</b></label><input type=\"checkbox\" (change)=\"onCheck()\" /></span>\n            <span><button type=\"button\" (click)=\"updateSettings()\">Generate</button></span>\n        </div>\n        <div class=\"market_body gridRow3\" *ngIf=\"isReady\">\n            <div class=\"gridRow market_tabs\">\n                <span class=\"clickable sw_back_op\" (click)=\"setCurTab('melee')\">Melee Market</span>\n                <span class=\"clickable sw_back_op\" (click)=\"setCurTab('ranged')\">Ranged Market</span>\n                <span class=\"clickable sw_back_op\" (click)=\"setCurTab('armor')\">Armor Market</span>\n                <span class=\"clickable sw_back_op\" (click)=\"setCurTab('gear')\">Gear Market</span>\n                <span class=\"clickable sw_back_op\" (click)=\"setCurTab('attach')\">Attachment Market</span>\n            </div>\n            <div class=\"gridRow2\" *ngIf=\"curTab == 'melee'\">\n                <app-market-melee *ngIf=\"curTab == 'melee'\"></app-market-melee>\n            </div>\n            <div class=\"gridRow2\" *ngIf=\"curTab == 'ranged'\">\n                <app-market-ranged *ngIf=\"curTab == 'ranged'\"></app-market-ranged>\n            </div>\n            <div class=\"gridRow2\" *ngIf=\"curTab == 'armor'\">\n                <app-market-armor *ngIf=\"curTab == 'armor'\"></app-market-armor>\n            </div>\n            <div class=\"gridRow2\" *ngIf=\"curTab == 'gear'\">\n                <app-market-gear *ngIf=\"curTab == 'gear'\"></app-market-gear>\n            </div>\n            <div class=\"gridRow2\" *ngIf=\"curTab == 'attach'\">\n                <app-market-attachment *ngIf=\"curTab == 'attach'\"></app-market-attachment>\n            </div>\n        </div>\n    </div>\n</div>\n");
 
 /***/ }),
 
@@ -545,9 +623,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 /* harmony import */ var _species_species_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./species/species.module */ "./src/app/species/species.module.ts");
 /* harmony import */ var _careers_careers_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./careers/careers.module */ "./src/app/careers/careers.module.ts");
-/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _characters_characters_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./characters/characters.component */ "./src/app/characters/characters.component.ts");
+/* harmony import */ var _market_market_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./market/market.module */ "./src/app/market/market.module.ts");
+/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _characters_characters_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./characters/characters.component */ "./src/app/characters/characters.component.ts");
+
 
 
 
@@ -564,20 +644,21 @@ let AppModule = class AppModule {
 AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["NgModule"])({
         declarations: [
-            _app_component__WEBPACK_IMPORTED_MODULE_9__["AppComponent"],
-            _characters_characters_component__WEBPACK_IMPORTED_MODULE_10__["CharactersComponent"]
+            _app_component__WEBPACK_IMPORTED_MODULE_10__["AppComponent"],
+            _characters_characters_component__WEBPACK_IMPORTED_MODULE_11__["CharactersComponent"]
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
             _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_2__["BrowserAnimationsModule"],
-            _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"],
+            _app_routing_module__WEBPACK_IMPORTED_MODULE_9__["AppRoutingModule"],
             _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormsModule"],
             _species_species_module__WEBPACK_IMPORTED_MODULE_6__["SpeciesModule"],
-            _careers_careers_module__WEBPACK_IMPORTED_MODULE_7__["CareersModule"]
+            _careers_careers_module__WEBPACK_IMPORTED_MODULE_7__["CareersModule"],
+            _market_market_module__WEBPACK_IMPORTED_MODULE_8__["MarketModule"]
         ],
         providers: [],
-        bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_9__["AppComponent"]]
+        bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_10__["AppComponent"]]
     })
 ], AppModule);
 
@@ -1463,6 +1544,847 @@ CharactersComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
+/***/ "./src/app/market/market-armor/market-armor.component.css":
+/*!****************************************************************!*\
+  !*** ./src/app/market/market-armor/market-armor.component.css ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (".armorBase {\n    display: flex;\n    flex-direction: row;\n    flex-wrap: nowrap;\n    align-content: space-around;\n    justify-content: space-around;\n}\n\n.armorTable {\n    display: grid;\n    grid-template-columns: 70% 1fr;\n    align-items: center;\n}\n\n.armorMainTable {\n    grid-template-rows: 5vh 5vh 1fr;\n}\n\n.armTabBase {\n    margin-top: 2vh;\n    padding-top: 2vh;\n    padding-bottom: 2vh;\n    flex-grow: 1;\n    height: -webkit-min-content;\n    height: -moz-min-content;\n    height: min-content;\n    max-height: 75vh;\n}\n\n.armorSpan {\n    grid-column-start: 1;\n    grid-column-end: 3;\n}\n\n.th_sub_name {\n    font-size: 1.25em;\n}\n\n.th_head_mod {\n    margin-left: 1vw;\n    margin-right: 1vw;\n}\n\n.pads {\n    padding-top: 1vh;\n    padding-bottom: 1vh;\n}\n\n.margs {\n    margin-top: 0.5vh;\n    margin-bottom: 0.5vh;\n}\n\n.alignLeft {\n    text-align: left;\n    margin-left: 2vw;\n}\n\n.det_back {\n    padding: 1vh 1.5vw;\n    display: grid;\n    grid-template-rows: 5vh repeat(7, 3vh) 1fr;\n    grid-row-gap: 1vh;\n}\n\n.det_head {\n    display: grid;\n    grid-template-columns: 95% 1fr;\n    grid-column-gap: 1vw;\n    align-content: center;\n}\n\n.det_head > button {\n    margin: 0;\n}\n\n.det_row {\n    display: flex;\n    flex-direction: row;\n    flex-wrap: nowrap;\n    justify-content: flex-start;\n    font-size: 1.5em;\n}\n\n.det_label {\n    margin-right: 1vw;\n    flex-basis: 15vw;\n}\n\n.itemDesc {\n    padding: 1vh 1vw;\n    font-size: 1.4em;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWFya2V0L21hcmtldC1hcm1vci9tYXJrZXQtYXJtb3IuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLGFBQWE7SUFDYixtQkFBbUI7SUFDbkIsaUJBQWlCO0lBQ2pCLDJCQUEyQjtJQUMzQiw2QkFBNkI7QUFDakM7O0FBRUE7SUFDSSxhQUFhO0lBQ2IsOEJBQThCO0lBQzlCLG1CQUFtQjtBQUN2Qjs7QUFFQTtJQUNJLCtCQUErQjtBQUNuQzs7QUFFQTtJQUNJLGVBQWU7SUFDZixnQkFBZ0I7SUFDaEIsbUJBQW1CO0lBQ25CLFlBQVk7SUFDWiwyQkFBbUI7SUFBbkIsd0JBQW1CO0lBQW5CLG1CQUFtQjtJQUNuQixnQkFBZ0I7QUFDcEI7O0FBRUE7SUFDSSxvQkFBb0I7SUFDcEIsa0JBQWtCO0FBQ3RCOztBQUVBO0lBQ0ksaUJBQWlCO0FBQ3JCOztBQUVBO0lBQ0ksZ0JBQWdCO0lBQ2hCLGlCQUFpQjtBQUNyQjs7QUFFQTtJQUNJLGdCQUFnQjtJQUNoQixtQkFBbUI7QUFDdkI7O0FBRUE7SUFDSSxpQkFBaUI7SUFDakIsb0JBQW9CO0FBQ3hCOztBQUVBO0lBQ0ksZ0JBQWdCO0lBQ2hCLGdCQUFnQjtBQUNwQjs7QUFFQTtJQUNJLGtCQUFrQjtJQUNsQixhQUFhO0lBQ2IsMENBQTBDO0lBQzFDLGlCQUFpQjtBQUNyQjs7QUFFQTtJQUNJLGFBQWE7SUFDYiw4QkFBOEI7SUFDOUIsb0JBQW9CO0lBQ3BCLHFCQUFxQjtBQUN6Qjs7QUFFQTtJQUNJLFNBQVM7QUFDYjs7QUFFQTtJQUNJLGFBQWE7SUFDYixtQkFBbUI7SUFDbkIsaUJBQWlCO0lBQ2pCLDJCQUEyQjtJQUMzQixnQkFBZ0I7QUFDcEI7O0FBRUE7SUFDSSxpQkFBaUI7SUFDakIsZ0JBQWdCO0FBQ3BCOztBQUVBO0lBQ0ksZ0JBQWdCO0lBQ2hCLGdCQUFnQjtBQUNwQiIsImZpbGUiOiJzcmMvYXBwL21hcmtldC9tYXJrZXQtYXJtb3IvbWFya2V0LWFybW9yLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuYXJtb3JCYXNlIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gICAgZmxleC13cmFwOiBub3dyYXA7XG4gICAgYWxpZ24tY29udGVudDogc3BhY2UtYXJvdW5kO1xuICAgIGp1c3RpZnktY29udGVudDogc3BhY2UtYXJvdW5kO1xufVxuXG4uYXJtb3JUYWJsZSB7XG4gICAgZGlzcGxheTogZ3JpZDtcbiAgICBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IDcwJSAxZnI7XG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbn1cblxuLmFybW9yTWFpblRhYmxlIHtcbiAgICBncmlkLXRlbXBsYXRlLXJvd3M6IDV2aCA1dmggMWZyO1xufVxuXG4uYXJtVGFiQmFzZSB7XG4gICAgbWFyZ2luLXRvcDogMnZoO1xuICAgIHBhZGRpbmctdG9wOiAydmg7XG4gICAgcGFkZGluZy1ib3R0b206IDJ2aDtcbiAgICBmbGV4LWdyb3c6IDE7XG4gICAgaGVpZ2h0OiBtaW4tY29udGVudDtcbiAgICBtYXgtaGVpZ2h0OiA3NXZoO1xufVxuXG4uYXJtb3JTcGFuIHtcbiAgICBncmlkLWNvbHVtbi1zdGFydDogMTtcbiAgICBncmlkLWNvbHVtbi1lbmQ6IDM7XG59XG5cbi50aF9zdWJfbmFtZSB7XG4gICAgZm9udC1zaXplOiAxLjI1ZW07XG59XG5cbi50aF9oZWFkX21vZCB7XG4gICAgbWFyZ2luLWxlZnQ6IDF2dztcbiAgICBtYXJnaW4tcmlnaHQ6IDF2dztcbn1cblxuLnBhZHMge1xuICAgIHBhZGRpbmctdG9wOiAxdmg7XG4gICAgcGFkZGluZy1ib3R0b206IDF2aDtcbn1cblxuLm1hcmdzIHtcbiAgICBtYXJnaW4tdG9wOiAwLjV2aDtcbiAgICBtYXJnaW4tYm90dG9tOiAwLjV2aDtcbn1cblxuLmFsaWduTGVmdCB7XG4gICAgdGV4dC1hbGlnbjogbGVmdDtcbiAgICBtYXJnaW4tbGVmdDogMnZ3O1xufVxuXG4uZGV0X2JhY2sge1xuICAgIHBhZGRpbmc6IDF2aCAxLjV2dztcbiAgICBkaXNwbGF5OiBncmlkO1xuICAgIGdyaWQtdGVtcGxhdGUtcm93czogNXZoIHJlcGVhdCg3LCAzdmgpIDFmcjtcbiAgICBncmlkLXJvdy1nYXA6IDF2aDtcbn1cblxuLmRldF9oZWFkIHtcbiAgICBkaXNwbGF5OiBncmlkO1xuICAgIGdyaWQtdGVtcGxhdGUtY29sdW1uczogOTUlIDFmcjtcbiAgICBncmlkLWNvbHVtbi1nYXA6IDF2dztcbiAgICBhbGlnbi1jb250ZW50OiBjZW50ZXI7XG59XG5cbi5kZXRfaGVhZCA+IGJ1dHRvbiB7XG4gICAgbWFyZ2luOiAwO1xufVxuXG4uZGV0X3JvdyB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICAgIGZsZXgtd3JhcDogbm93cmFwO1xuICAgIGp1c3RpZnktY29udGVudDogZmxleC1zdGFydDtcbiAgICBmb250LXNpemU6IDEuNWVtO1xufVxuXG4uZGV0X2xhYmVsIHtcbiAgICBtYXJnaW4tcmlnaHQ6IDF2dztcbiAgICBmbGV4LWJhc2lzOiAxNXZ3O1xufVxuXG4uaXRlbURlc2Mge1xuICAgIHBhZGRpbmc6IDF2aCAxdnc7XG4gICAgZm9udC1zaXplOiAxLjRlbTtcbn1cbiJdfQ== */");
+
+/***/ }),
+
+/***/ "./src/app/market/market-armor/market-armor.component.ts":
+/*!***************************************************************!*\
+  !*** ./src/app/market/market-armor/market-armor.component.ts ***!
+  \***************************************************************/
+/*! exports provided: MarketArmorComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MarketArmorComponent", function() { return MarketArmorComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _unit_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../unit.service */ "./src/app/unit.service.ts");
+/* harmony import */ var _market_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../market.service */ "./src/app/market/market.service.ts");
+
+
+
+
+let MarketArmorComponent = class MarketArmorComponent {
+    constructor(unit, marketServ) {
+        this.unit = unit;
+        this.marketServ = marketServ;
+    }
+    ngOnInit() {
+        this.unit.log("Market-Melee Comp :: Init");
+        this.marketServ.getArmorMarket()
+            .subscribe(arms => this.armor = arms);
+        this.marketServ.armorBroadcast();
+        this.curArm = null;
+    }
+    setCurArm(arm) {
+        this.curArm = arm;
+    }
+    clearCurArm() {
+        this.curArm = null;
+    }
+};
+MarketArmorComponent.ctorParameters = () => [
+    { type: _unit_service__WEBPACK_IMPORTED_MODULE_2__["UnitService"] },
+    { type: _market_service__WEBPACK_IMPORTED_MODULE_3__["MarketService"] }
+];
+MarketArmorComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-market-armor',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./market-armor.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/market/market-armor/market-armor.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./market-armor.component.css */ "./src/app/market/market-armor/market-armor.component.css")).default]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_unit_service__WEBPACK_IMPORTED_MODULE_2__["UnitService"],
+        _market_service__WEBPACK_IMPORTED_MODULE_3__["MarketService"]])
+], MarketArmorComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/market/market-attachment/market-attachment.component.css":
+/*!**************************************************************************!*\
+  !*** ./src/app/market/market-attachment/market-attachment.component.css ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (".itemBase {\n    display: flex;\n    flex-direction: row;\n    flex-wrap: nowrap;\n    align-content: space-around;\n    justify-content: space-around;\n}\n\n.itemTable {\n    display: grid;\n    grid-template-columns: 70% 1fr;\n    align-items: center;\n}\n\n.itemMainTable {\n    grid-template-rows: 5vh 5vh 1fr;\n}\n\n.itemTabBase {\n    margin-top: 2vh;\n    padding-top: 2vh;\n    padding-bottom: 2vh;\n    flex-basis: 30vw;\n    flex-grow: 1;\n    height: -webkit-min-content;\n    height: -moz-min-content;\n    height: min-content;\n    max-height: 75vh;\n}\n\n.itemRowContainer {\n    height: 100%;\n    overflow-y: auto;\n}\n\n.itemSpan {\n    grid-column-start: 1;\n    grid-column-end: 3;\n}\n\n.th_sub_name {\n    font-size: 1.25em;\n}\n\n.th_head_mod {\n    margin-left: 1vw;\n    margin-right: 1vw;\n}\n\n.pads {\n    padding-top: 1vh;\n    padding-bottom: 1vh;\n}\n\n.margs {\n    margin-top: 0.5vh;\n    margin-bottom: 0.5vh;\n}\n\n.alignLeft {\n    text-align: left;\n    margin-left: 2vw;\n}\n\n.det_back {\n    padding: 1vh 1.5vw 3vh 1.5vw;\n    display: grid;\n    grid-template-rows: 5vh repeat(5, 3vh) repeat(3, auto);\n    grid-row-gap: 1vh;\n}\n\n.det_head {\n    display: grid;\n    grid-template-columns: 95% 1fr;\n    grid-column-gap: 1vw;\n    align-content: center;\n}\n\n.det_head > button {\n    margin: 0;\n}\n\n.det_row {\n    display: flex;\n    flex-direction: row;\n    flex-wrap: nowrap;\n    justify-content: flex-start;\n    font-size: 1.5em;\n}\n\n.det_label {\n    margin-right: 1vw;\n    flex-basis: 15vw;\n}\n\n.itemDesc {\n    padding: 1vh 1vw;\n    font-size: 1.4em;\n}\n\n.mod_opts {\n    display: grid;\n    grid-row-gap: 1vh;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWFya2V0L21hcmtldC1hdHRhY2htZW50L21hcmtldC1hdHRhY2htZW50LmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxhQUFhO0lBQ2IsbUJBQW1CO0lBQ25CLGlCQUFpQjtJQUNqQiwyQkFBMkI7SUFDM0IsNkJBQTZCO0FBQ2pDOztBQUVBO0lBQ0ksYUFBYTtJQUNiLDhCQUE4QjtJQUM5QixtQkFBbUI7QUFDdkI7O0FBRUE7SUFDSSwrQkFBK0I7QUFDbkM7O0FBRUE7SUFDSSxlQUFlO0lBQ2YsZ0JBQWdCO0lBQ2hCLG1CQUFtQjtJQUNuQixnQkFBZ0I7SUFDaEIsWUFBWTtJQUNaLDJCQUFtQjtJQUFuQix3QkFBbUI7SUFBbkIsbUJBQW1CO0lBQ25CLGdCQUFnQjtBQUNwQjs7QUFFQTtJQUNJLFlBQVk7SUFDWixnQkFBZ0I7QUFDcEI7O0FBRUE7SUFDSSxvQkFBb0I7SUFDcEIsa0JBQWtCO0FBQ3RCOztBQUVBO0lBQ0ksaUJBQWlCO0FBQ3JCOztBQUVBO0lBQ0ksZ0JBQWdCO0lBQ2hCLGlCQUFpQjtBQUNyQjs7QUFFQTtJQUNJLGdCQUFnQjtJQUNoQixtQkFBbUI7QUFDdkI7O0FBRUE7SUFDSSxpQkFBaUI7SUFDakIsb0JBQW9CO0FBQ3hCOztBQUVBO0lBQ0ksZ0JBQWdCO0lBQ2hCLGdCQUFnQjtBQUNwQjs7QUFFQTtJQUNJLDRCQUE0QjtJQUM1QixhQUFhO0lBQ2Isc0RBQXNEO0lBQ3RELGlCQUFpQjtBQUNyQjs7QUFFQTtJQUNJLGFBQWE7SUFDYiw4QkFBOEI7SUFDOUIsb0JBQW9CO0lBQ3BCLHFCQUFxQjtBQUN6Qjs7QUFFQTtJQUNJLFNBQVM7QUFDYjs7QUFFQTtJQUNJLGFBQWE7SUFDYixtQkFBbUI7SUFDbkIsaUJBQWlCO0lBQ2pCLDJCQUEyQjtJQUMzQixnQkFBZ0I7QUFDcEI7O0FBRUE7SUFDSSxpQkFBaUI7SUFDakIsZ0JBQWdCO0FBQ3BCOztBQUVBO0lBQ0ksZ0JBQWdCO0lBQ2hCLGdCQUFnQjtBQUNwQjs7QUFFQTtJQUNJLGFBQWE7SUFDYixpQkFBaUI7QUFDckIiLCJmaWxlIjoic3JjL2FwcC9tYXJrZXQvbWFya2V0LWF0dGFjaG1lbnQvbWFya2V0LWF0dGFjaG1lbnQuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5pdGVtQmFzZSB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICAgIGZsZXgtd3JhcDogbm93cmFwO1xuICAgIGFsaWduLWNvbnRlbnQ6IHNwYWNlLWFyb3VuZDtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWFyb3VuZDtcbn1cblxuLml0ZW1UYWJsZSB7XG4gICAgZGlzcGxheTogZ3JpZDtcbiAgICBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IDcwJSAxZnI7XG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbn1cblxuLml0ZW1NYWluVGFibGUge1xuICAgIGdyaWQtdGVtcGxhdGUtcm93czogNXZoIDV2aCAxZnI7XG59XG5cbi5pdGVtVGFiQmFzZSB7XG4gICAgbWFyZ2luLXRvcDogMnZoO1xuICAgIHBhZGRpbmctdG9wOiAydmg7XG4gICAgcGFkZGluZy1ib3R0b206IDJ2aDtcbiAgICBmbGV4LWJhc2lzOiAzMHZ3O1xuICAgIGZsZXgtZ3JvdzogMTtcbiAgICBoZWlnaHQ6IG1pbi1jb250ZW50O1xuICAgIG1heC1oZWlnaHQ6IDc1dmg7XG59XG5cbi5pdGVtUm93Q29udGFpbmVyIHtcbiAgICBoZWlnaHQ6IDEwMCU7XG4gICAgb3ZlcmZsb3cteTogYXV0bztcbn1cblxuLml0ZW1TcGFuIHtcbiAgICBncmlkLWNvbHVtbi1zdGFydDogMTtcbiAgICBncmlkLWNvbHVtbi1lbmQ6IDM7XG59XG5cbi50aF9zdWJfbmFtZSB7XG4gICAgZm9udC1zaXplOiAxLjI1ZW07XG59XG5cbi50aF9oZWFkX21vZCB7XG4gICAgbWFyZ2luLWxlZnQ6IDF2dztcbiAgICBtYXJnaW4tcmlnaHQ6IDF2dztcbn1cblxuLnBhZHMge1xuICAgIHBhZGRpbmctdG9wOiAxdmg7XG4gICAgcGFkZGluZy1ib3R0b206IDF2aDtcbn1cblxuLm1hcmdzIHtcbiAgICBtYXJnaW4tdG9wOiAwLjV2aDtcbiAgICBtYXJnaW4tYm90dG9tOiAwLjV2aDtcbn1cblxuLmFsaWduTGVmdCB7XG4gICAgdGV4dC1hbGlnbjogbGVmdDtcbiAgICBtYXJnaW4tbGVmdDogMnZ3O1xufVxuXG4uZGV0X2JhY2sge1xuICAgIHBhZGRpbmc6IDF2aCAxLjV2dyAzdmggMS41dnc7XG4gICAgZGlzcGxheTogZ3JpZDtcbiAgICBncmlkLXRlbXBsYXRlLXJvd3M6IDV2aCByZXBlYXQoNSwgM3ZoKSByZXBlYXQoMywgYXV0byk7XG4gICAgZ3JpZC1yb3ctZ2FwOiAxdmg7XG59XG5cbi5kZXRfaGVhZCB7XG4gICAgZGlzcGxheTogZ3JpZDtcbiAgICBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IDk1JSAxZnI7XG4gICAgZ3JpZC1jb2x1bW4tZ2FwOiAxdnc7XG4gICAgYWxpZ24tY29udGVudDogY2VudGVyO1xufVxuXG4uZGV0X2hlYWQgPiBidXR0b24ge1xuICAgIG1hcmdpbjogMDtcbn1cblxuLmRldF9yb3cge1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgICBmbGV4LXdyYXA6IG5vd3JhcDtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtc3RhcnQ7XG4gICAgZm9udC1zaXplOiAxLjVlbTtcbn1cblxuLmRldF9sYWJlbCB7XG4gICAgbWFyZ2luLXJpZ2h0OiAxdnc7XG4gICAgZmxleC1iYXNpczogMTV2dztcbn1cblxuLml0ZW1EZXNjIHtcbiAgICBwYWRkaW5nOiAxdmggMXZ3O1xuICAgIGZvbnQtc2l6ZTogMS40ZW07XG59XG5cbi5tb2Rfb3B0cyB7XG4gICAgZGlzcGxheTogZ3JpZDtcbiAgICBncmlkLXJvdy1nYXA6IDF2aDtcbn1cbiJdfQ== */");
+
+/***/ }),
+
+/***/ "./src/app/market/market-attachment/market-attachment.component.ts":
+/*!*************************************************************************!*\
+  !*** ./src/app/market/market-attachment/market-attachment.component.ts ***!
+  \*************************************************************************/
+/*! exports provided: MarketAttachmentComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MarketAttachmentComponent", function() { return MarketAttachmentComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _unit_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../unit.service */ "./src/app/unit.service.ts");
+/* harmony import */ var _market_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../market.service */ "./src/app/market/market.service.ts");
+
+
+
+
+let MarketAttachmentComponent = class MarketAttachmentComponent {
+    constructor(unit, marketServ) {
+        this.unit = unit;
+        this.marketServ = marketServ;
+    }
+    ngOnInit() {
+        this.unit.log("Market-Attach Comp :: Init");
+        this.marketServ.getAttachMarket()
+            .subscribe(atts => {
+            let weaps = [];
+            let arms = [];
+            let lights = [];
+            for (let i = 0; i < atts.length; i++) {
+                switch (atts[i].attachment.type) {
+                    case "Weapon":
+                        weaps.push(atts[i]);
+                        break;
+                    case "Armor":
+                        arms.push(atts[i]);
+                        break;
+                    case "Lightsaber":
+                        lights.push(atts[i]);
+                        break;
+                }
+            }
+            this.weapons = weaps;
+            this.armor = arms;
+            this.lightsabers = lights;
+        });
+        this.marketServ.attachBroadcast();
+        this.curAtt = null;
+    }
+    setCurAtt(att) {
+        this.curAtt = att;
+    }
+    clearCurAtt() {
+        this.curAtt = null;
+    }
+};
+MarketAttachmentComponent.ctorParameters = () => [
+    { type: _unit_service__WEBPACK_IMPORTED_MODULE_2__["UnitService"] },
+    { type: _market_service__WEBPACK_IMPORTED_MODULE_3__["MarketService"] }
+];
+MarketAttachmentComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-market-attachment',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./market-attachment.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/market/market-attachment/market-attachment.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./market-attachment.component.css */ "./src/app/market/market-attachment/market-attachment.component.css")).default]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_unit_service__WEBPACK_IMPORTED_MODULE_2__["UnitService"],
+        _market_service__WEBPACK_IMPORTED_MODULE_3__["MarketService"]])
+], MarketAttachmentComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/market/market-gear/market-gear.component.css":
+/*!**************************************************************!*\
+  !*** ./src/app/market/market-gear/market-gear.component.css ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (".itemBase {\n    display: flex;\n    flex-direction: row;\n    flex-wrap: wrap;\n    align-content: space-around;\n    justify-content: space-around;\n    overflow-y: auto;\n}\n\n.itemTable {\n    display: grid;\n    grid-template-columns: 70% 1fr;\n    align-items: center;\n}\n\n.itemMainTable {\n    grid-template-rows: 5vh 5vh 1fr;\n}\n\n.itemTabBase {\n    margin-top: 2vh;\n    padding-top: 2vh;\n    padding-bottom: 2vh;\n    flex-basis: 20vw;\n    flex-grow: 1;\n    height: -webkit-min-content;\n    height: -moz-min-content;\n    height: min-content;\n    max-height: 75vh;\n}\n\n.itemRowContainer {\n    height: 100%;\n    overflow-y: auto;\n}\n\n.itemSpan {\n    grid-column-start: 1;\n    grid-column-end: 3;\n}\n\n.th_sub_name {\n    font-size: 1.25em;\n}\n\n.th_head_mod {\n    margin-left: 1vw;\n    margin-right: 1vw;\n    font-size: 1.1em;\n}\n\n.th_head_unmod {\n    margin-left: 1vw;\n    margin-right: 1vw;\n    font-size: 1.75em;\n}\n\n.pads {\n    padding-top: 1vh;\n    padding-bottom: 1vh;\n}\n\n.margs {\n    margin-top: 0.5vh;\n    margin-bottom: 0.5vh;\n    font-size: 1em\n}\n\n.alignLeft {\n    text-align: left;\n    margin-left: 2vw;\n}\n\n.det_back {\n    padding: 1vh 1.5vw;\n    display: grid;\n    grid-template-rows: 5vh repeat(4, 3vh) 1fr;\n    grid-row-gap: 1vh;\n}\n\n.det_head {\n    display: grid;\n    grid-template-columns: 95% 1fr;\n    grid-column-gap: 1vw;\n    align-content: center;\n}\n\n.det_head > button {\n    margin: 0;\n}\n\n.det_row {\n    display: flex;\n    flex-direction: row;\n    flex-wrap: nowrap;\n    justify-content: flex-start;\n    font-size: 1.5em;\n}\n\n.det_label {\n    margin-right: 1vw;\n    flex-basis: 15vw;\n}\n\n.itemDesc {\n    padding: 1vh 1vw;\n    font-size: 1.4em;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWFya2V0L21hcmtldC1nZWFyL21hcmtldC1nZWFyLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxhQUFhO0lBQ2IsbUJBQW1CO0lBQ25CLGVBQWU7SUFDZiwyQkFBMkI7SUFDM0IsNkJBQTZCO0lBQzdCLGdCQUFnQjtBQUNwQjs7QUFFQTtJQUNJLGFBQWE7SUFDYiw4QkFBOEI7SUFDOUIsbUJBQW1CO0FBQ3ZCOztBQUVBO0lBQ0ksK0JBQStCO0FBQ25DOztBQUVBO0lBQ0ksZUFBZTtJQUNmLGdCQUFnQjtJQUNoQixtQkFBbUI7SUFDbkIsZ0JBQWdCO0lBQ2hCLFlBQVk7SUFDWiwyQkFBbUI7SUFBbkIsd0JBQW1CO0lBQW5CLG1CQUFtQjtJQUNuQixnQkFBZ0I7QUFDcEI7O0FBRUE7SUFDSSxZQUFZO0lBQ1osZ0JBQWdCO0FBQ3BCOztBQUVBO0lBQ0ksb0JBQW9CO0lBQ3BCLGtCQUFrQjtBQUN0Qjs7QUFFQTtJQUNJLGlCQUFpQjtBQUNyQjs7QUFFQTtJQUNJLGdCQUFnQjtJQUNoQixpQkFBaUI7SUFDakIsZ0JBQWdCO0FBQ3BCOztBQUVBO0lBQ0ksZ0JBQWdCO0lBQ2hCLGlCQUFpQjtJQUNqQixpQkFBaUI7QUFDckI7O0FBRUE7SUFDSSxnQkFBZ0I7SUFDaEIsbUJBQW1CO0FBQ3ZCOztBQUVBO0lBQ0ksaUJBQWlCO0lBQ2pCLG9CQUFvQjtJQUNwQjtBQUNKOztBQUVBO0lBQ0ksZ0JBQWdCO0lBQ2hCLGdCQUFnQjtBQUNwQjs7QUFFQTtJQUNJLGtCQUFrQjtJQUNsQixhQUFhO0lBQ2IsMENBQTBDO0lBQzFDLGlCQUFpQjtBQUNyQjs7QUFFQTtJQUNJLGFBQWE7SUFDYiw4QkFBOEI7SUFDOUIsb0JBQW9CO0lBQ3BCLHFCQUFxQjtBQUN6Qjs7QUFFQTtJQUNJLFNBQVM7QUFDYjs7QUFFQTtJQUNJLGFBQWE7SUFDYixtQkFBbUI7SUFDbkIsaUJBQWlCO0lBQ2pCLDJCQUEyQjtJQUMzQixnQkFBZ0I7QUFDcEI7O0FBRUE7SUFDSSxpQkFBaUI7SUFDakIsZ0JBQWdCO0FBQ3BCOztBQUVBO0lBQ0ksZ0JBQWdCO0lBQ2hCLGdCQUFnQjtBQUNwQiIsImZpbGUiOiJzcmMvYXBwL21hcmtldC9tYXJrZXQtZ2Vhci9tYXJrZXQtZ2Vhci5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLml0ZW1CYXNlIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gICAgZmxleC13cmFwOiB3cmFwO1xuICAgIGFsaWduLWNvbnRlbnQ6IHNwYWNlLWFyb3VuZDtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWFyb3VuZDtcbiAgICBvdmVyZmxvdy15OiBhdXRvO1xufVxuXG4uaXRlbVRhYmxlIHtcbiAgICBkaXNwbGF5OiBncmlkO1xuICAgIGdyaWQtdGVtcGxhdGUtY29sdW1uczogNzAlIDFmcjtcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xufVxuXG4uaXRlbU1haW5UYWJsZSB7XG4gICAgZ3JpZC10ZW1wbGF0ZS1yb3dzOiA1dmggNXZoIDFmcjtcbn1cblxuLml0ZW1UYWJCYXNlIHtcbiAgICBtYXJnaW4tdG9wOiAydmg7XG4gICAgcGFkZGluZy10b3A6IDJ2aDtcbiAgICBwYWRkaW5nLWJvdHRvbTogMnZoO1xuICAgIGZsZXgtYmFzaXM6IDIwdnc7XG4gICAgZmxleC1ncm93OiAxO1xuICAgIGhlaWdodDogbWluLWNvbnRlbnQ7XG4gICAgbWF4LWhlaWdodDogNzV2aDtcbn1cblxuLml0ZW1Sb3dDb250YWluZXIge1xuICAgIGhlaWdodDogMTAwJTtcbiAgICBvdmVyZmxvdy15OiBhdXRvO1xufVxuXG4uaXRlbVNwYW4ge1xuICAgIGdyaWQtY29sdW1uLXN0YXJ0OiAxO1xuICAgIGdyaWQtY29sdW1uLWVuZDogMztcbn1cblxuLnRoX3N1Yl9uYW1lIHtcbiAgICBmb250LXNpemU6IDEuMjVlbTtcbn1cblxuLnRoX2hlYWRfbW9kIHtcbiAgICBtYXJnaW4tbGVmdDogMXZ3O1xuICAgIG1hcmdpbi1yaWdodDogMXZ3O1xuICAgIGZvbnQtc2l6ZTogMS4xZW07XG59XG5cbi50aF9oZWFkX3VubW9kIHtcbiAgICBtYXJnaW4tbGVmdDogMXZ3O1xuICAgIG1hcmdpbi1yaWdodDogMXZ3O1xuICAgIGZvbnQtc2l6ZTogMS43NWVtO1xufVxuXG4ucGFkcyB7XG4gICAgcGFkZGluZy10b3A6IDF2aDtcbiAgICBwYWRkaW5nLWJvdHRvbTogMXZoO1xufVxuXG4ubWFyZ3Mge1xuICAgIG1hcmdpbi10b3A6IDAuNXZoO1xuICAgIG1hcmdpbi1ib3R0b206IDAuNXZoO1xuICAgIGZvbnQtc2l6ZTogMWVtXG59XG5cbi5hbGlnbkxlZnQge1xuICAgIHRleHQtYWxpZ246IGxlZnQ7XG4gICAgbWFyZ2luLWxlZnQ6IDJ2dztcbn1cblxuLmRldF9iYWNrIHtcbiAgICBwYWRkaW5nOiAxdmggMS41dnc7XG4gICAgZGlzcGxheTogZ3JpZDtcbiAgICBncmlkLXRlbXBsYXRlLXJvd3M6IDV2aCByZXBlYXQoNCwgM3ZoKSAxZnI7XG4gICAgZ3JpZC1yb3ctZ2FwOiAxdmg7XG59XG5cbi5kZXRfaGVhZCB7XG4gICAgZGlzcGxheTogZ3JpZDtcbiAgICBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IDk1JSAxZnI7XG4gICAgZ3JpZC1jb2x1bW4tZ2FwOiAxdnc7XG4gICAgYWxpZ24tY29udGVudDogY2VudGVyO1xufVxuXG4uZGV0X2hlYWQgPiBidXR0b24ge1xuICAgIG1hcmdpbjogMDtcbn1cblxuLmRldF9yb3cge1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgICBmbGV4LXdyYXA6IG5vd3JhcDtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtc3RhcnQ7XG4gICAgZm9udC1zaXplOiAxLjVlbTtcbn1cblxuLmRldF9sYWJlbCB7XG4gICAgbWFyZ2luLXJpZ2h0OiAxdnc7XG4gICAgZmxleC1iYXNpczogMTV2dztcbn1cblxuLml0ZW1EZXNjIHtcbiAgICBwYWRkaW5nOiAxdmggMXZ3O1xuICAgIGZvbnQtc2l6ZTogMS40ZW07XG59XG4iXX0= */");
+
+/***/ }),
+
+/***/ "./src/app/market/market-gear/market-gear.component.ts":
+/*!*************************************************************!*\
+  !*** ./src/app/market/market-gear/market-gear.component.ts ***!
+  \*************************************************************/
+/*! exports provided: MarketGearComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MarketGearComponent", function() { return MarketGearComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _unit_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../unit.service */ "./src/app/unit.service.ts");
+/* harmony import */ var _market_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../market.service */ "./src/app/market/market.service.ts");
+
+
+
+
+let MarketGearComponent = class MarketGearComponent {
+    constructor(unit, marketServ) {
+        this.unit = unit;
+        this.marketServ = marketServ;
+    }
+    ngOnInit() {
+        this.unit.log("Market-Gear Comp :: Init");
+        this.marketServ.getGearMarket()
+            .subscribe(ges => {
+            this.itemless = false;
+            let coms = [];
+            let drgs = [];
+            let scans = [];
+            let medic = [];
+            let cyb = [];
+            let recr = [];
+            let secur = [];
+            let surv = [];
+            let tls = [];
+            let load = [];
+            let slic = [];
+            let constr = [];
+            let remot = [];
+            if (ges.length == 0) {
+                this.itemless = true;
+            }
+            for (let i = 0; i < ges.length; i++) {
+                switch (ges[i].gear.type) {
+                    case "Communications Equipment":
+                        coms.push(ges[i]);
+                        break;
+                    case "Poisons and Drugs":
+                        drgs.push(ges[i]);
+                        break;
+                    case "Scanning and Surveillance Equipment (Detection Devices)":
+                        scans.push(ges[i]);
+                        break;
+                    case "Medical Equipment":
+                        medic.push(ges[i]);
+                        break;
+                    case "Cybernetic Enhancements and Replacements":
+                        cyb.push(ges[i]);
+                        break;
+                    case "Recreational Entertainment":
+                        recr.push(ges[i]);
+                        break;
+                    case "Infiltration and Espionage Equipment (Security)":
+                        secur.push(ges[i]);
+                        break;
+                    case "Survival Gear":
+                        surv.push(ges[i]);
+                        break;
+                    case "Tools and Electronics":
+                        tls.push(ges[i]);
+                        break;
+                    case "Load Bearing, Carrying, and Storage Equipment":
+                        load.push(ges[i]);
+                        break;
+                    case "Slicing Tools":
+                        slic.push(ges[i]);
+                        break;
+                    case "Construction and Salvage Tools":
+                        constr.push(ges[i]);
+                        break;
+                    case "Remotes":
+                        remot.push(ges[i]);
+                        break;
+                }
+            }
+            this.comms = coms;
+            this.drugs = drgs;
+            this.scanners = scans;
+            this.medical = medic;
+            this.cybernetics = cyb;
+            this.recrereation = recr;
+            this.security = secur;
+            this.survival = surv;
+            this.tools = tls;
+            this.loadBearing = load;
+            this.slicing = slic;
+            this.construction = constr;
+            this.remotes = remot;
+        });
+        this.marketServ.gearBroadcast();
+        this.curGear = null;
+    }
+    setCurGear(gear) {
+        this.curGear = gear;
+    }
+    clearCurGear() {
+        this.curGear = null;
+    }
+};
+MarketGearComponent.ctorParameters = () => [
+    { type: _unit_service__WEBPACK_IMPORTED_MODULE_2__["UnitService"] },
+    { type: _market_service__WEBPACK_IMPORTED_MODULE_3__["MarketService"] }
+];
+MarketGearComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-market-gear',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./market-gear.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/market/market-gear/market-gear.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./market-gear.component.css */ "./src/app/market/market-gear/market-gear.component.css")).default]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_unit_service__WEBPACK_IMPORTED_MODULE_2__["UnitService"],
+        _market_service__WEBPACK_IMPORTED_MODULE_3__["MarketService"]])
+], MarketGearComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/market/market-melee/market-melee.component.css":
+/*!****************************************************************!*\
+  !*** ./src/app/market/market-melee/market-melee.component.css ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (".itemBase {\n    display: flex;\n    flex-direction: row;\n    flex-wrap: nowrap;\n    align-content: space-around;\n    justify-content: space-around;\n}\n\n.itemTable {\n    display: grid;\n    grid-template-columns: 70% 1fr;\n    align-items: center;\n}\n\n.itemMainTable {\n    grid-template-rows: 5vh 5vh 1fr;\n}\n\n.itemTabBase {\n    margin-top: 2vh;\n    padding-top: 2vh;\n    padding-bottom: 2vh;\n    flex-basis: 30vw;\n    flex-grow: 1;\n    height: -webkit-min-content;\n    height: -moz-min-content;\n    height: min-content;\n    max-height: 75vh;\n}\n\n.itemRowContainer {\n    height: 100%;\n    overflow-y: auto;\n}\n\n.itemSpan {\n    grid-column-start: 1;\n    grid-column-end: 3;\n}\n\n.th_sub_name {\n    font-size: 1.25em;\n}\n\n.th_head_mod {\n    margin-left: 1vw;\n    margin-right: 1vw;\n}\n\n.pads {\n    padding-top: 1vh;\n    padding-bottom: 1vh;\n}\n\n.margs {\n    margin-top: 0.5vh;\n    margin-bottom: 0.5vh;\n}\n\n.alignLeft {\n    text-align: left;\n    margin-left: 2vw;\n}\n\n.det_back {\n    padding: 1vh 1.5vw;\n    display: grid;\n    grid-template-rows: 5vh repeat(11, 3vh) 1fr;\n    grid-row-gap: 1vh;\n}\n\n.det_head {\n    display: grid;\n    grid-template-columns: 95% 1fr;\n    grid-column-gap: 1vw;\n    align-content: center;\n}\n\n.det_head > button {\n    margin: 0;\n}\n\n.det_row {\n    display: flex;\n    flex-direction: row;\n    flex-wrap: nowrap;\n    justify-content: flex-start;\n    font-size: 1.5em;\n}\n\n.det_label {\n    margin-right: 1vw;\n    flex-basis: 15vw;\n}\n\n.itemDesc {\n    padding: 1vh 1vw;\n    font-size: 1.4em;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWFya2V0L21hcmtldC1tZWxlZS9tYXJrZXQtbWVsZWUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLGFBQWE7SUFDYixtQkFBbUI7SUFDbkIsaUJBQWlCO0lBQ2pCLDJCQUEyQjtJQUMzQiw2QkFBNkI7QUFDakM7O0FBRUE7SUFDSSxhQUFhO0lBQ2IsOEJBQThCO0lBQzlCLG1CQUFtQjtBQUN2Qjs7QUFFQTtJQUNJLCtCQUErQjtBQUNuQzs7QUFFQTtJQUNJLGVBQWU7SUFDZixnQkFBZ0I7SUFDaEIsbUJBQW1CO0lBQ25CLGdCQUFnQjtJQUNoQixZQUFZO0lBQ1osMkJBQW1CO0lBQW5CLHdCQUFtQjtJQUFuQixtQkFBbUI7SUFDbkIsZ0JBQWdCO0FBQ3BCOztBQUVBO0lBQ0ksWUFBWTtJQUNaLGdCQUFnQjtBQUNwQjs7QUFFQTtJQUNJLG9CQUFvQjtJQUNwQixrQkFBa0I7QUFDdEI7O0FBRUE7SUFDSSxpQkFBaUI7QUFDckI7O0FBRUE7SUFDSSxnQkFBZ0I7SUFDaEIsaUJBQWlCO0FBQ3JCOztBQUVBO0lBQ0ksZ0JBQWdCO0lBQ2hCLG1CQUFtQjtBQUN2Qjs7QUFFQTtJQUNJLGlCQUFpQjtJQUNqQixvQkFBb0I7QUFDeEI7O0FBRUE7SUFDSSxnQkFBZ0I7SUFDaEIsZ0JBQWdCO0FBQ3BCOztBQUVBO0lBQ0ksa0JBQWtCO0lBQ2xCLGFBQWE7SUFDYiwyQ0FBMkM7SUFDM0MsaUJBQWlCO0FBQ3JCOztBQUVBO0lBQ0ksYUFBYTtJQUNiLDhCQUE4QjtJQUM5QixvQkFBb0I7SUFDcEIscUJBQXFCO0FBQ3pCOztBQUVBO0lBQ0ksU0FBUztBQUNiOztBQUVBO0lBQ0ksYUFBYTtJQUNiLG1CQUFtQjtJQUNuQixpQkFBaUI7SUFDakIsMkJBQTJCO0lBQzNCLGdCQUFnQjtBQUNwQjs7QUFFQTtJQUNJLGlCQUFpQjtJQUNqQixnQkFBZ0I7QUFDcEI7O0FBRUE7SUFDSSxnQkFBZ0I7SUFDaEIsZ0JBQWdCO0FBQ3BCIiwiZmlsZSI6InNyYy9hcHAvbWFya2V0L21hcmtldC1tZWxlZS9tYXJrZXQtbWVsZWUuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5pdGVtQmFzZSB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICAgIGZsZXgtd3JhcDogbm93cmFwO1xuICAgIGFsaWduLWNvbnRlbnQ6IHNwYWNlLWFyb3VuZDtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWFyb3VuZDtcbn1cblxuLml0ZW1UYWJsZSB7XG4gICAgZGlzcGxheTogZ3JpZDtcbiAgICBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IDcwJSAxZnI7XG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbn1cblxuLml0ZW1NYWluVGFibGUge1xuICAgIGdyaWQtdGVtcGxhdGUtcm93czogNXZoIDV2aCAxZnI7XG59XG5cbi5pdGVtVGFiQmFzZSB7XG4gICAgbWFyZ2luLXRvcDogMnZoO1xuICAgIHBhZGRpbmctdG9wOiAydmg7XG4gICAgcGFkZGluZy1ib3R0b206IDJ2aDtcbiAgICBmbGV4LWJhc2lzOiAzMHZ3O1xuICAgIGZsZXgtZ3JvdzogMTtcbiAgICBoZWlnaHQ6IG1pbi1jb250ZW50O1xuICAgIG1heC1oZWlnaHQ6IDc1dmg7XG59XG5cbi5pdGVtUm93Q29udGFpbmVyIHtcbiAgICBoZWlnaHQ6IDEwMCU7XG4gICAgb3ZlcmZsb3cteTogYXV0bztcbn1cblxuLml0ZW1TcGFuIHtcbiAgICBncmlkLWNvbHVtbi1zdGFydDogMTtcbiAgICBncmlkLWNvbHVtbi1lbmQ6IDM7XG59XG5cbi50aF9zdWJfbmFtZSB7XG4gICAgZm9udC1zaXplOiAxLjI1ZW07XG59XG5cbi50aF9oZWFkX21vZCB7XG4gICAgbWFyZ2luLWxlZnQ6IDF2dztcbiAgICBtYXJnaW4tcmlnaHQ6IDF2dztcbn1cblxuLnBhZHMge1xuICAgIHBhZGRpbmctdG9wOiAxdmg7XG4gICAgcGFkZGluZy1ib3R0b206IDF2aDtcbn1cblxuLm1hcmdzIHtcbiAgICBtYXJnaW4tdG9wOiAwLjV2aDtcbiAgICBtYXJnaW4tYm90dG9tOiAwLjV2aDtcbn1cblxuLmFsaWduTGVmdCB7XG4gICAgdGV4dC1hbGlnbjogbGVmdDtcbiAgICBtYXJnaW4tbGVmdDogMnZ3O1xufVxuXG4uZGV0X2JhY2sge1xuICAgIHBhZGRpbmc6IDF2aCAxLjV2dztcbiAgICBkaXNwbGF5OiBncmlkO1xuICAgIGdyaWQtdGVtcGxhdGUtcm93czogNXZoIHJlcGVhdCgxMSwgM3ZoKSAxZnI7XG4gICAgZ3JpZC1yb3ctZ2FwOiAxdmg7XG59XG5cbi5kZXRfaGVhZCB7XG4gICAgZGlzcGxheTogZ3JpZDtcbiAgICBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IDk1JSAxZnI7XG4gICAgZ3JpZC1jb2x1bW4tZ2FwOiAxdnc7XG4gICAgYWxpZ24tY29udGVudDogY2VudGVyO1xufVxuXG4uZGV0X2hlYWQgPiBidXR0b24ge1xuICAgIG1hcmdpbjogMDtcbn1cblxuLmRldF9yb3cge1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgICBmbGV4LXdyYXA6IG5vd3JhcDtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtc3RhcnQ7XG4gICAgZm9udC1zaXplOiAxLjVlbTtcbn1cblxuLmRldF9sYWJlbCB7XG4gICAgbWFyZ2luLXJpZ2h0OiAxdnc7XG4gICAgZmxleC1iYXNpczogMTV2dztcbn1cblxuLml0ZW1EZXNjIHtcbiAgICBwYWRkaW5nOiAxdmggMXZ3O1xuICAgIGZvbnQtc2l6ZTogMS40ZW07XG59XG4iXX0= */");
+
+/***/ }),
+
+/***/ "./src/app/market/market-melee/market-melee.component.ts":
+/*!***************************************************************!*\
+  !*** ./src/app/market/market-melee/market-melee.component.ts ***!
+  \***************************************************************/
+/*! exports provided: MarketMeleeComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MarketMeleeComponent", function() { return MarketMeleeComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _unit_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../unit.service */ "./src/app/unit.service.ts");
+/* harmony import */ var _market_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../market.service */ "./src/app/market/market.service.ts");
+
+
+
+
+let MarketMeleeComponent = class MarketMeleeComponent {
+    constructor(unit, marketServ) {
+        this.unit = unit;
+        this.marketServ = marketServ;
+    }
+    ngOnInit() {
+        this.unit.log("Market-Melee Comp :: Init");
+        this.marketServ.getMeleeMarket()
+            .subscribe(weaps => {
+            let mel = [];
+            let bra = [];
+            let lig = [];
+            for (let i = 0; i < weaps.length; i++) {
+                if (weaps[i].weapon.sub_type == "Melee Weapons") {
+                    mel.push(weaps[i]);
+                }
+                else if (weaps[i].weapon.sub_type == "Brawling Weapons") {
+                    bra.push(weaps[i]);
+                }
+                else {
+                    lig.push(weaps[i]);
+                }
+            }
+            this.melee = mel;
+            this.brawl = bra;
+            this.light = lig;
+        });
+        this.marketServ.meleeBroadcast();
+        this.curMelee = null;
+    }
+    setCurMelee(weap) {
+        this.curMelee = weap;
+    }
+    clearCurMelee() {
+        this.curMelee = null;
+    }
+};
+MarketMeleeComponent.ctorParameters = () => [
+    { type: _unit_service__WEBPACK_IMPORTED_MODULE_2__["UnitService"] },
+    { type: _market_service__WEBPACK_IMPORTED_MODULE_3__["MarketService"] }
+];
+MarketMeleeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-market-melee',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./market-melee.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/market/market-melee/market-melee.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./market-melee.component.css */ "./src/app/market/market-melee/market-melee.component.css")).default]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_unit_service__WEBPACK_IMPORTED_MODULE_2__["UnitService"],
+        _market_service__WEBPACK_IMPORTED_MODULE_3__["MarketService"]])
+], MarketMeleeComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/market/market-ranged/market-ranged.component.css":
+/*!******************************************************************!*\
+  !*** ./src/app/market/market-ranged/market-ranged.component.css ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (".itemBase {\n    display: flex;\n    flex-direction: row;\n    flex-wrap: wrap;\n    align-content: space-around;\n    justify-content: space-around;\n}\n\n.itemTable {\n    display: grid;\n    grid-template-columns: 70% 1fr;\n    align-items: center;\n}\n\n.itemMainTable {\n    grid-template-rows: 5vh 5vh 1fr;\n}\n\n.itemTabBase {\n    margin-top: 2vh;\n    padding-top: 2vh;\n    padding-bottom: 2vh;\n    flex-basis: 24vw;\n    flex-grow: 1;\n    height: -webkit-min-content;\n    height: -moz-min-content;\n    height: min-content;\n    max-height: 75vh;\n    min-width: 250px;\n}\n\n.itemRowContainer {\n    height: 100%;\n    overflow-y: auto;\n}\n\n.itemSpan {\n    grid-column-start: 1;\n    grid-column-end: 3;\n}\n\n.th_sub_name {\n    font-size: 1.25em;\n}\n\n.th_head_mod {\n    margin-left: 1vw;\n    margin-right: 1vw;\n}\n\n.pads {\n    padding-top: 1vh;\n    padding-bottom: 1vh;\n}\n\n.margs {\n    margin-top: 0.5vh;\n    margin-bottom: 0.5vh;\n}\n\n.alignLeft {\n    text-align: left;\n    margin-left: 2vw;\n}\n\n.det_back {\n    padding: 1vh 1.5vw;\n    display: grid;\n    grid-template-rows: 5vh repeat(11, 3vh) 1fr;\n    grid-row-gap: 1vh;\n}\n\n.det_head {\n    display: grid;\n    grid-template-columns: 95% 1fr;\n    grid-column-gap: 1vw;\n    align-content: center;\n}\n\n.det_head > button {\n    margin: 0;\n}\n\n.det_row {\n    display: flex;\n    flex-direction: row;\n    flex-wrap: nowrap;\n    justify-content: flex-start;\n    font-size: 1.5em;\n}\n\n.det_label {\n    margin-right: 1vw;\n    flex-basis: 15vw;\n}\n\n.itemDesc {\n    padding: 1vh 1vw;\n    font-size: 1.4em;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWFya2V0L21hcmtldC1yYW5nZWQvbWFya2V0LXJhbmdlZC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksYUFBYTtJQUNiLG1CQUFtQjtJQUNuQixlQUFlO0lBQ2YsMkJBQTJCO0lBQzNCLDZCQUE2QjtBQUNqQzs7QUFFQTtJQUNJLGFBQWE7SUFDYiw4QkFBOEI7SUFDOUIsbUJBQW1CO0FBQ3ZCOztBQUVBO0lBQ0ksK0JBQStCO0FBQ25DOztBQUVBO0lBQ0ksZUFBZTtJQUNmLGdCQUFnQjtJQUNoQixtQkFBbUI7SUFDbkIsZ0JBQWdCO0lBQ2hCLFlBQVk7SUFDWiwyQkFBbUI7SUFBbkIsd0JBQW1CO0lBQW5CLG1CQUFtQjtJQUNuQixnQkFBZ0I7SUFDaEIsZ0JBQWdCO0FBQ3BCOztBQUVBO0lBQ0ksWUFBWTtJQUNaLGdCQUFnQjtBQUNwQjs7QUFFQTtJQUNJLG9CQUFvQjtJQUNwQixrQkFBa0I7QUFDdEI7O0FBRUE7SUFDSSxpQkFBaUI7QUFDckI7O0FBRUE7SUFDSSxnQkFBZ0I7SUFDaEIsaUJBQWlCO0FBQ3JCOztBQUVBO0lBQ0ksZ0JBQWdCO0lBQ2hCLG1CQUFtQjtBQUN2Qjs7QUFFQTtJQUNJLGlCQUFpQjtJQUNqQixvQkFBb0I7QUFDeEI7O0FBRUE7SUFDSSxnQkFBZ0I7SUFDaEIsZ0JBQWdCO0FBQ3BCOztBQUVBO0lBQ0ksa0JBQWtCO0lBQ2xCLGFBQWE7SUFDYiwyQ0FBMkM7SUFDM0MsaUJBQWlCO0FBQ3JCOztBQUVBO0lBQ0ksYUFBYTtJQUNiLDhCQUE4QjtJQUM5QixvQkFBb0I7SUFDcEIscUJBQXFCO0FBQ3pCOztBQUVBO0lBQ0ksU0FBUztBQUNiOztBQUVBO0lBQ0ksYUFBYTtJQUNiLG1CQUFtQjtJQUNuQixpQkFBaUI7SUFDakIsMkJBQTJCO0lBQzNCLGdCQUFnQjtBQUNwQjs7QUFFQTtJQUNJLGlCQUFpQjtJQUNqQixnQkFBZ0I7QUFDcEI7O0FBRUE7SUFDSSxnQkFBZ0I7SUFDaEIsZ0JBQWdCO0FBQ3BCIiwiZmlsZSI6InNyYy9hcHAvbWFya2V0L21hcmtldC1yYW5nZWQvbWFya2V0LXJhbmdlZC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLml0ZW1CYXNlIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gICAgZmxleC13cmFwOiB3cmFwO1xuICAgIGFsaWduLWNvbnRlbnQ6IHNwYWNlLWFyb3VuZDtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWFyb3VuZDtcbn1cblxuLml0ZW1UYWJsZSB7XG4gICAgZGlzcGxheTogZ3JpZDtcbiAgICBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IDcwJSAxZnI7XG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbn1cblxuLml0ZW1NYWluVGFibGUge1xuICAgIGdyaWQtdGVtcGxhdGUtcm93czogNXZoIDV2aCAxZnI7XG59XG5cbi5pdGVtVGFiQmFzZSB7XG4gICAgbWFyZ2luLXRvcDogMnZoO1xuICAgIHBhZGRpbmctdG9wOiAydmg7XG4gICAgcGFkZGluZy1ib3R0b206IDJ2aDtcbiAgICBmbGV4LWJhc2lzOiAyNHZ3O1xuICAgIGZsZXgtZ3JvdzogMTtcbiAgICBoZWlnaHQ6IG1pbi1jb250ZW50O1xuICAgIG1heC1oZWlnaHQ6IDc1dmg7XG4gICAgbWluLXdpZHRoOiAyNTBweDtcbn1cblxuLml0ZW1Sb3dDb250YWluZXIge1xuICAgIGhlaWdodDogMTAwJTtcbiAgICBvdmVyZmxvdy15OiBhdXRvO1xufVxuXG4uaXRlbVNwYW4ge1xuICAgIGdyaWQtY29sdW1uLXN0YXJ0OiAxO1xuICAgIGdyaWQtY29sdW1uLWVuZDogMztcbn1cblxuLnRoX3N1Yl9uYW1lIHtcbiAgICBmb250LXNpemU6IDEuMjVlbTtcbn1cblxuLnRoX2hlYWRfbW9kIHtcbiAgICBtYXJnaW4tbGVmdDogMXZ3O1xuICAgIG1hcmdpbi1yaWdodDogMXZ3O1xufVxuXG4ucGFkcyB7XG4gICAgcGFkZGluZy10b3A6IDF2aDtcbiAgICBwYWRkaW5nLWJvdHRvbTogMXZoO1xufVxuXG4ubWFyZ3Mge1xuICAgIG1hcmdpbi10b3A6IDAuNXZoO1xuICAgIG1hcmdpbi1ib3R0b206IDAuNXZoO1xufVxuXG4uYWxpZ25MZWZ0IHtcbiAgICB0ZXh0LWFsaWduOiBsZWZ0O1xuICAgIG1hcmdpbi1sZWZ0OiAydnc7XG59XG5cbi5kZXRfYmFjayB7XG4gICAgcGFkZGluZzogMXZoIDEuNXZ3O1xuICAgIGRpc3BsYXk6IGdyaWQ7XG4gICAgZ3JpZC10ZW1wbGF0ZS1yb3dzOiA1dmggcmVwZWF0KDExLCAzdmgpIDFmcjtcbiAgICBncmlkLXJvdy1nYXA6IDF2aDtcbn1cblxuLmRldF9oZWFkIHtcbiAgICBkaXNwbGF5OiBncmlkO1xuICAgIGdyaWQtdGVtcGxhdGUtY29sdW1uczogOTUlIDFmcjtcbiAgICBncmlkLWNvbHVtbi1nYXA6IDF2dztcbiAgICBhbGlnbi1jb250ZW50OiBjZW50ZXI7XG59XG5cbi5kZXRfaGVhZCA+IGJ1dHRvbiB7XG4gICAgbWFyZ2luOiAwO1xufVxuXG4uZGV0X3JvdyB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICAgIGZsZXgtd3JhcDogbm93cmFwO1xuICAgIGp1c3RpZnktY29udGVudDogZmxleC1zdGFydDtcbiAgICBmb250LXNpemU6IDEuNWVtO1xufVxuXG4uZGV0X2xhYmVsIHtcbiAgICBtYXJnaW4tcmlnaHQ6IDF2dztcbiAgICBmbGV4LWJhc2lzOiAxNXZ3O1xufVxuXG4uaXRlbURlc2Mge1xuICAgIHBhZGRpbmc6IDF2aCAxdnc7XG4gICAgZm9udC1zaXplOiAxLjRlbTtcbn1cbiJdfQ== */");
+
+/***/ }),
+
+/***/ "./src/app/market/market-ranged/market-ranged.component.ts":
+/*!*****************************************************************!*\
+  !*** ./src/app/market/market-ranged/market-ranged.component.ts ***!
+  \*****************************************************************/
+/*! exports provided: MarketRangedComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MarketRangedComponent", function() { return MarketRangedComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _unit_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../unit.service */ "./src/app/unit.service.ts");
+/* harmony import */ var _market_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../market.service */ "./src/app/market/market.service.ts");
+
+
+
+
+let MarketRangedComponent = class MarketRangedComponent {
+    constructor(unit, marketServ) {
+        this.unit = unit;
+        this.marketServ = marketServ;
+    }
+    ngOnInit() {
+        this.unit.log("Market-Ranged Comp :: Init");
+        this.weapons$ = this.marketServ.getRangedMarket();
+        this.weapons$.subscribe(weaps => {
+            let lig = [];
+            let hea = [];
+            let gun = [];
+            let mac = [];
+            for (let i = 0; i < weaps.length; i++) {
+                if (weaps[i].weapon.skill.name == "Ranged (Light)") {
+                    lig.push(weaps[i]);
+                }
+                else if (weaps[i].weapon.skill.name == "Ranged (Heavy)") {
+                    hea.push(weaps[i]);
+                }
+                else if (weaps[i].weapon.skill.name == "Gunnery") {
+                    gun.push(weaps[i]);
+                }
+                else {
+                    mac.push(weaps[i]);
+                }
+            }
+            this.light = lig;
+            this.heavy = hea;
+            this.gunn = gun;
+            this.mach = mac;
+        });
+        this.marketServ.rangedBroadcast();
+        this.curRange = null;
+    }
+    setCurRange(weap) {
+        this.curRange = weap;
+    }
+    clearCurRange() {
+        this.curRange = null;
+    }
+};
+MarketRangedComponent.ctorParameters = () => [
+    { type: _unit_service__WEBPACK_IMPORTED_MODULE_2__["UnitService"] },
+    { type: _market_service__WEBPACK_IMPORTED_MODULE_3__["MarketService"] }
+];
+MarketRangedComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-market-ranged',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./market-ranged.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/market/market-ranged/market-ranged.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./market-ranged.component.css */ "./src/app/market/market-ranged/market-ranged.component.css")).default]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_unit_service__WEBPACK_IMPORTED_MODULE_2__["UnitService"],
+        _market_service__WEBPACK_IMPORTED_MODULE_3__["MarketService"]])
+], MarketRangedComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/market/market-routing.module.ts":
+/*!*************************************************!*\
+  !*** ./src/app/market/market-routing.module.ts ***!
+  \*************************************************/
+/*! exports provided: MarketRoutingModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MarketRoutingModule", function() { return MarketRoutingModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _market_market_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./market/market.component */ "./src/app/market/market/market.component.ts");
+
+
+
+
+const routes = [
+    {
+        path: 'market',
+        component: _market_market_component__WEBPACK_IMPORTED_MODULE_3__["MarketComponent"]
+    }
+];
+let MarketRoutingModule = class MarketRoutingModule {
+};
+MarketRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+        imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes)],
+        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]]
+    })
+], MarketRoutingModule);
+
+
+
+/***/ }),
+
+/***/ "./src/app/market/market.module.ts":
+/*!*****************************************!*\
+  !*** ./src/app/market/market.module.ts ***!
+  \*****************************************/
+/*! exports provided: MarketModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MarketModule", function() { return MarketModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+/* harmony import */ var _market_routing_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./market-routing.module */ "./src/app/market/market-routing.module.ts");
+/* harmony import */ var _market_market_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./market/market.component */ "./src/app/market/market/market.component.ts");
+/* harmony import */ var _market_melee_market_melee_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./market-melee/market-melee.component */ "./src/app/market/market-melee/market-melee.component.ts");
+/* harmony import */ var _market_ranged_market_ranged_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./market-ranged/market-ranged.component */ "./src/app/market/market-ranged/market-ranged.component.ts");
+/* harmony import */ var _market_armor_market_armor_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./market-armor/market-armor.component */ "./src/app/market/market-armor/market-armor.component.ts");
+/* harmony import */ var _market_gear_market_gear_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./market-gear/market-gear.component */ "./src/app/market/market-gear/market-gear.component.ts");
+/* harmony import */ var _market_attachment_market_attachment_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./market-attachment/market-attachment.component */ "./src/app/market/market-attachment/market-attachment.component.ts");
+
+
+
+
+
+
+
+
+
+
+let MarketModule = class MarketModule {
+};
+MarketModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+        declarations: [
+            _market_market_component__WEBPACK_IMPORTED_MODULE_4__["MarketComponent"],
+            _market_melee_market_melee_component__WEBPACK_IMPORTED_MODULE_5__["MarketMeleeComponent"],
+            _market_ranged_market_ranged_component__WEBPACK_IMPORTED_MODULE_6__["MarketRangedComponent"],
+            _market_armor_market_armor_component__WEBPACK_IMPORTED_MODULE_7__["MarketArmorComponent"],
+            _market_gear_market_gear_component__WEBPACK_IMPORTED_MODULE_8__["MarketGearComponent"],
+            _market_attachment_market_attachment_component__WEBPACK_IMPORTED_MODULE_9__["MarketAttachmentComponent"]
+        ],
+        imports: [
+            _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
+            _market_routing_module__WEBPACK_IMPORTED_MODULE_3__["MarketRoutingModule"]
+        ]
+    })
+], MarketModule);
+
+
+
+/***/ }),
+
+/***/ "./src/app/market/market.service.ts":
+/*!******************************************!*\
+  !*** ./src/app/market/market.service.ts ***!
+  \******************************************/
+/*! exports provided: MarketService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MarketService", function() { return MarketService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+/* harmony import */ var _unit_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../unit.service */ "./src/app/unit.service.ts");
+
+
+
+
+
+
+const httpOptions = {
+    headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' })
+};
+let MarketService = class MarketService {
+    constructor(unit, http) {
+        this.unit = unit;
+        this.http = http;
+        this.meleeUrl = '/market/melee';
+        this.randedUrl = '/market/ranged';
+        this.armorUrl = '/market/armor';
+        this.gearUrl = '/market/gear';
+        this.attachmentUrl = '/market/attachment';
+        this.planetMod = null;
+        this.restricted = null;
+        this.isReady = false;
+        this.meleeSource = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
+        this.meleeMarket$ = this.meleeSource.asObservable();
+        this.meleeFetched = [];
+        this.rangedSource = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
+        this.rangedMarket$ = this.rangedSource.asObservable();
+        this.rangedFetched = [];
+        this.armorSource = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
+        this.armorMarket$ = this.armorSource.asObservable();
+        this.armorFetched = [];
+        this.gearSource = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
+        this.gearMarket$ = this.gearSource.asObservable();
+        this.gearFetched = [];
+        this.attachSource = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
+        this.attachMarket$ = this.attachSource.asObservable();
+        this.attachFetched = [];
+    }
+    getPlanetMod() { return this.planetMod; }
+    setPlanetMod(val) { this.planetMod = val; }
+    getRestricted() { return this.restricted; }
+    setRestricted(val) { this.restricted = val; }
+    getIsReady() { return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(this.isReady); }
+    getMeleeMarket() { return this.meleeMarket$; }
+    getRangedMarket() { return this.rangedMarket$; }
+    getArmorMarket() { return this.armorMarket$; }
+    getGearMarket() { return this.gearMarket$; }
+    getAttachMarket() { return this.attachMarket$; }
+    ready() {
+        this.unit.log("Market Serv :: Ready");
+        this.fetchMelee();
+        this.fetchRanged();
+        this.fetchArmor();
+        this.fetchGear();
+        this.fetchAttachment();
+        if (!this.isReady) {
+            this.isReady = true;
+        }
+    }
+    fetchMelee() {
+        this.http.post(this.meleeUrl, { planet_mod: Number(this.planetMod), restricted: this.restricted }, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(_ => this.unit.log("Market Serv :: Melee Gotten")), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('fetchMelee')))
+            .subscribe(weaps => {
+            for (let i = 0; i < weaps.length; i++) {
+                let minInd = i;
+                for (let j = i; j < weaps.length; ++j) {
+                    if (weaps[j].model < weaps[minInd].model) {
+                        minInd = j;
+                    }
+                }
+                [weaps[i], weaps[minInd]] = [weaps[minInd], weaps[i]];
+            }
+            this.meleeFetched = weaps;
+            this.meleeSource.next(weaps);
+        });
+    }
+    meleeBroadcast() {
+        this.meleeSource.next(this.meleeFetched);
+    }
+    fetchRanged() {
+        this.http.post(this.randedUrl, { planet_mod: Number(this.planetMod), restricted: this.restricted }, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(_ => this.unit.log("Market Serv :: Ranged Gotten")), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('fetchRanged')))
+            .subscribe(weaps => {
+            for (let i = 0; i < weaps.length; i++) {
+                let minInd = i;
+                for (let j = i; j < weaps.length; ++j) {
+                    if (weaps[j].model < weaps[minInd].model) {
+                        minInd = j;
+                    }
+                }
+                [weaps[i], weaps[minInd]] = [weaps[minInd], weaps[i]];
+            }
+            this.rangedFetched = weaps;
+            this.rangedSource.next(weaps);
+        });
+    }
+    rangedBroadcast() {
+        this.rangedSource.next(this.rangedFetched);
+    }
+    fetchArmor() {
+        this.http.post(this.armorUrl, { planet_mod: Number(this.planetMod), restricted: this.restricted }, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(_ => this.unit.log("Market Serv :: Armor Gotten")), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('fetchArmor')))
+            .subscribe(arms => {
+            for (let i = 0; i < arms.length; i++) {
+                let minInd = i;
+                for (let j = i; j < arms.length; ++j) {
+                    if (arms[j].model < arms[minInd].model) {
+                        minInd = j;
+                    }
+                }
+                [arms[i], arms[minInd]] = [arms[minInd], arms[i]];
+            }
+            this.armorFetched = arms;
+            this.armorSource.next(arms);
+        });
+    }
+    armorBroadcast() {
+        this.armorSource.next(this.armorFetched);
+    }
+    fetchGear() {
+        this.http.post(this.gearUrl, { planet_mod: Number(this.planetMod), restricted: this.restricted }, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(_ => this.unit.log("Market Serv :: Gear Gotten")), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('fetchGear')))
+            .subscribe(gear => {
+            for (let i = 0; i < gear.length; i++) {
+                let minInd = i;
+                for (let j = i; j < gear.length; ++j) {
+                    if (gear[j].model < gear[minInd].model) {
+                        minInd = j;
+                    }
+                }
+                [gear[i], gear[minInd]] = [gear[minInd], gear[i]];
+            }
+            this.gearFetched = gear;
+            this.gearSource.next(gear);
+        });
+    }
+    gearBroadcast() {
+        this.gearSource.next(this.gearFetched);
+    }
+    fetchAttachment() {
+        this.http.post(this.attachmentUrl, { planet_mod: Number(this.planetMod), restricted: this.restricted }, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(_ => this.unit.log("Market Serv :: Attach Gotten")), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('fetchAttachment')))
+            .subscribe(att => {
+            for (let i = 0; i < att.length; i++) {
+                let minInd = i;
+                for (let j = i; j < att.length; ++j) {
+                    if (att[j].model < att[minInd].model) {
+                        minInd = j;
+                    }
+                }
+                [att[i], att[minInd]] = [att[minInd], att[i]];
+            }
+            this.attachFetched = att;
+            this.attachSource.next(att);
+        });
+    }
+    attachBroadcast() {
+        this.attachSource.next(this.attachFetched);
+    }
+    handleError(operation = 'operation', result) {
+        return (error) => {
+            // TODO: send the error to remote logging infrastructure
+            console.error(error); // log to console instead
+            // TODO: better job of transforming error for user consumption
+            this.unit.log(`${operation} failed: ${error.message}`);
+            // Let the app keep running by returning an empty result.
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(result);
+        };
+    }
+};
+MarketService.ctorParameters = () => [
+    { type: _unit_service__WEBPACK_IMPORTED_MODULE_5__["UnitService"] },
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
+];
+MarketService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_unit_service__WEBPACK_IMPORTED_MODULE_5__["UnitService"],
+        _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
+], MarketService);
+
+
+
+/***/ }),
+
+/***/ "./src/app/market/market/market.component.css":
+/*!****************************************************!*\
+  !*** ./src/app/market/market/market.component.css ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (".base_page {\n    display: grid;\n    grid-template-rows: 4vh 3vh 1fr;\n\theight: 95vh;\n\tword-break: break-word;\n\tmargin-top: 2.5vh;\n    overflow-y: auto;\n}\n\n.market_mod {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.market_mod > span {\n    padding: 0.5vh 0.75vw 0.5vh 0.75vw;\n    text-align: center;\n}\n\n.market_body {\n    display: grid;\n    grid-template-rows: 5vh 1fr;\n    margin-top: 2vh;\n}\n\n.market_tabs {\n    display: grid;\n    grid-template-columns: repeat(5, 1fr);\n}\n\n.market_tabs > span {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWFya2V0L21hcmtldC9tYXJrZXQuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLGFBQWE7SUFDYiwrQkFBK0I7Q0FDbEMsWUFBWTtDQUNaLHNCQUFzQjtDQUN0QixpQkFBaUI7SUFDZCxnQkFBZ0I7QUFDcEI7O0FBRUE7SUFDSSxhQUFhO0lBQ2IsbUJBQW1CO0lBQ25CLHVCQUF1QjtBQUMzQjs7QUFFQTtJQUNJLGtDQUFrQztJQUNsQyxrQkFBa0I7QUFDdEI7O0FBRUE7SUFDSSxhQUFhO0lBQ2IsMkJBQTJCO0lBQzNCLGVBQWU7QUFDbkI7O0FBRUE7SUFDSSxhQUFhO0lBQ2IscUNBQXFDO0FBQ3pDOztBQUVBO0lBQ0ksYUFBYTtJQUNiLG1CQUFtQjtJQUNuQix1QkFBdUI7QUFDM0IiLCJmaWxlIjoic3JjL2FwcC9tYXJrZXQvbWFya2V0L21hcmtldC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmJhc2VfcGFnZSB7XG4gICAgZGlzcGxheTogZ3JpZDtcbiAgICBncmlkLXRlbXBsYXRlLXJvd3M6IDR2aCAzdmggMWZyO1xuXHRoZWlnaHQ6IDk1dmg7XG5cdHdvcmQtYnJlYWs6IGJyZWFrLXdvcmQ7XG5cdG1hcmdpbi10b3A6IDIuNXZoO1xuICAgIG92ZXJmbG93LXk6IGF1dG87XG59XG5cbi5tYXJrZXRfbW9kIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG59XG5cbi5tYXJrZXRfbW9kID4gc3BhbiB7XG4gICAgcGFkZGluZzogMC41dmggMC43NXZ3IDAuNXZoIDAuNzV2dztcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG5cbi5tYXJrZXRfYm9keSB7XG4gICAgZGlzcGxheTogZ3JpZDtcbiAgICBncmlkLXRlbXBsYXRlLXJvd3M6IDV2aCAxZnI7XG4gICAgbWFyZ2luLXRvcDogMnZoO1xufVxuXG4ubWFya2V0X3RhYnMge1xuICAgIGRpc3BsYXk6IGdyaWQ7XG4gICAgZ3JpZC10ZW1wbGF0ZS1jb2x1bW5zOiByZXBlYXQoNSwgMWZyKTtcbn1cblxuLm1hcmtldF90YWJzID4gc3BhbiB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xufVxuIl19 */");
+
+/***/ }),
+
+/***/ "./src/app/market/market/market.component.ts":
+/*!***************************************************!*\
+  !*** ./src/app/market/market/market.component.ts ***!
+  \***************************************************/
+/*! exports provided: MarketComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MarketComponent", function() { return MarketComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _unit_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../unit.service */ "./src/app/unit.service.ts");
+/* harmony import */ var _market_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../market.service */ "./src/app/market/market.service.ts");
+
+
+
+
+let MarketComponent = class MarketComponent {
+    constructor(unit, marketServ) {
+        this.unit = unit;
+        this.marketServ = marketServ;
+    }
+    ngOnInit() {
+        this.unit.log("Market Comp :: Init");
+        this.planetMod = 0;
+        this.restricted = false;
+        this.isReady = false;
+        this.curTab = "melee";
+    }
+    onSelect(planet_mod) {
+        this.unit.log("Market Comp :: Change Select");
+        this.planetMod = planet_mod;
+    }
+    onCheck(restrict) {
+        this.unit.log("Market Comp :: Change check");
+        this.restricted = !this.restricted;
+    }
+    updateSettings() {
+        this.unit.log("Market Comp :: Update");
+        this.marketServ.setPlanetMod(this.planetMod);
+        this.marketServ.setRestricted(this.restricted);
+        this.isReady = true;
+        this.marketServ.ready();
+    }
+    setCurTab(newTab) {
+        this.curTab = newTab;
+    }
+};
+MarketComponent.ctorParameters = () => [
+    { type: _unit_service__WEBPACK_IMPORTED_MODULE_2__["UnitService"] },
+    { type: _market_service__WEBPACK_IMPORTED_MODULE_3__["MarketService"] }
+];
+MarketComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-market',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./market.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/market/market/market.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./market.component.css */ "./src/app/market/market/market.component.css")).default]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_unit_service__WEBPACK_IMPORTED_MODULE_2__["UnitService"],
+        _market_service__WEBPACK_IMPORTED_MODULE_3__["MarketService"]])
+], MarketComponent);
+
+
+
+/***/ }),
+
 /***/ "./src/app/mock-careers.ts":
 /*!*********************************!*\
   !*** ./src/app/mock-careers.ts ***!
@@ -2052,7 +2974,7 @@ SpeciesComponent.ctorParameters = () => [
 ];
 SpeciesComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'app-species-detail',
+        selector: 'app-species',
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./species.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/species/species/species.component.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./species.component.css */ "./src/app/species/species/species.component.css")).default]
     }),

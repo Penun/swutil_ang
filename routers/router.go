@@ -21,4 +21,10 @@ func init() {
 	beego.Router("/specializations/talents", &controllers.SpecializationsController{}, "post:Talents")
 	beego.Router("/specializations/skills", &controllers.SpecializationsController{}, "post:Skills")
 	beego.Router("/skills", &controllers.SkillsController{})
+	beego.Router("/market", &controllers.MarketController{})
+	beego.Router("/market/melee", &controllers.MarketController{}, "post:MeleeMarket")
+	beego.Router("/market/ranged", &controllers.MarketController{}, "post:RangedMarket")
+	beego.Router("/market/armor", &controllers.MarketController{}, "post:ArmorMarket")
+	beego.Router("/market/gear", &controllers.MarketController{}, "post:GearMarket")
+	beego.Router("/market/attachment", &controllers.MarketController{}, "post:AttachmentMarket")
 }

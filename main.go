@@ -16,6 +16,6 @@ func init() {
 }
 
 func main() {
-	orm.Debug = true
+	//orm.Debug = true
 	beego.Run()
 }
